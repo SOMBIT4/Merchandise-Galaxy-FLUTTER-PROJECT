@@ -107,7 +107,7 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 //sign in button
                 Mybutton(
-                  onTap: signinuser,
+                  onTap: () => Navigator.pushNamed(context, '/product_page'),
                 ),
 
                 const SizedBox(height: 20),

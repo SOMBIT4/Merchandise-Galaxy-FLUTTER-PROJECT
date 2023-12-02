@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:merchendise_galaxy/pages/product_page.dart';
 
 import 'pages/login_pages.dart';
 
@@ -14,6 +15,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: LoginPage(),
+      routes: {
+        '/product_page': (context) => const ProductPage(),
+      },
     );
   }
 }
