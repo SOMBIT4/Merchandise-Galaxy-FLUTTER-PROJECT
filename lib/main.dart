@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/pages/product_page.dart';
+import 'package:merchendise_galaxy/pages/register_page.dart';
 
 import 'pages/login_pages.dart';
 
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       home: LoginPage(),
       routes: {
         '/product_page': (context) => const ProductPage(),
+        '/register_page': (context) => registerPage(),
       },
     );
   }

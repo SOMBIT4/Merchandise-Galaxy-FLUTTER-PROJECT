@@ -3,17 +3,19 @@ import 'package:merchendise_galaxy/components/image_path.dart';
 import 'package:merchendise_galaxy/components/my_button.dart';
 import 'package:merchendise_galaxy/components/my_texfield.dart';
 import 'package:merchendise_galaxy/components/my_textfield1.dart';
-import 'package:merchendise_galaxy/components/register_button.dart';
 
-class LoginPage extends StatefulWidget {
-  //final Function()? onTap;
-  LoginPage({super.key /*,required this.onTap*/});
+class registerPage extends StatefulWidget {
+  // final Function()? onTap;
+  registerPage({
+    super.key,
+    /*required this.onTap*/
+  });
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<registerPage> createState() => _registerPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _registerPageState extends State<registerPage> {
 //text editing controller
   final usernamecontroller = TextEditingController();
 
@@ -32,17 +34,17 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
+                const SizedBox(height: 30),
 
                 //logo
                 const Icon(
                   Icons.lock,
                   size: 100,
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 20),
 
                 const Text(
-                  'Welcome back you\'ve been missed!',
+                  'Let\'s create an account',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -50,6 +52,14 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 const SizedBox(height: 25),
+                //name field
+                Mytextfield(
+                  controller: usernamecontroller,
+                  hintText: 'Name',
+                  obscureText: false,
+                ),
+
+                const SizedBox(height: 20),
                 //username field
                 Mytextfield(
                   controller: usernamecontroller,
@@ -57,61 +67,20 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: false,
                 ),
 
-                //for shadow
-                /*  Container( 
-                  child: Mytextfield(),
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black38,
-                          offset: Offset(0, 15),
-                          blurRadius: 10.0,
-                          //   spreadRadius: 2.0,
-                        ),
-                      ]),
-                ),
-          */
-                const SizedBox(height: 25),
+                const SizedBox(height: 20),
                 //password text field
                 Mytextfield1(
                   controller: passwordcontroller,
                   hintText: 'Password',
                 ),
 
-                //forgot password
-                const SizedBox(height: 10),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ],
-                  ),
+                const SizedBox(height: 20),
+                //confirm password text field
+                Mytextfield1(
+                  controller: passwordcontroller,
+                  hintText: 'Confirm Password',
                 ),
-                //remember me
-                //const SizedBox(height: 0),
-                /*   const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    children: [
-                      Icon(Icons.check_box_outline_blank),
-                      Text(
-                        'Remember me',
-                        style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),*/
+
                 const SizedBox(height: 20),
                 //sign in button
                 Mybutton(
@@ -167,20 +136,27 @@ class _LoginPageState extends State<LoginPage> {
                     Imagepath(image: 'lib/images/apple.png'),
                   ],
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Don't have an account?",
+                      "Already have an account?",
                       style: TextStyle(
                         fontSize: 16,
                       ),
                     ),
                     const SizedBox(width: 4),
-                    register(
-                        onTap: () =>
-                            Navigator.pushNamed(context, '/register_page')),
+                    // GestureDetector(
+                    // onTap: widget.onTap,
+                    /*child: */ const Text(
+                      'Login now',
+                      style: TextStyle(
+                          color: Colors.deepPurple,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    // ),
                   ],
                 )
               ],
