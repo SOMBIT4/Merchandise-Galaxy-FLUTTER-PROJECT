@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:merchendise_galaxy/pages/bottom_navbar.dart';
 import 'package:merchendise_galaxy/pages/product_page.dart';
 import 'package:merchendise_galaxy/pages/register_page.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/product_page': (context) => const ProductPage(),
         '/register_page': (context) => registerPage(),
+        '/buttomNavigation': (context) => const BottomNavigation(),
       },
     );
   }

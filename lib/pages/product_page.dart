@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:merchendise_galaxy/pages/bottom_navbar.dart';
 import 'package:merchendise_galaxy/re_useable/showProduct.dart';
 import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
@@ -16,6 +16,7 @@ class _HomePageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.backGroundColor,
+      bottomNavigationBar: const BottomNavigation(),
       body: ListView(
         children: [
           SafeArea(
