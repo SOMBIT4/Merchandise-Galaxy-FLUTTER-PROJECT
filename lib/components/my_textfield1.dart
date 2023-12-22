@@ -24,6 +24,7 @@ class _Mytextfield1State extends State<Mytextfield1> {
         controller: widget.controller,
         obscureText: _obsecuretext,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(15),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.black),
             borderRadius: BorderRadius.circular(12),

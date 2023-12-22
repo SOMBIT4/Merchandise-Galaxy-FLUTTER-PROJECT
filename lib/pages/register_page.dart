@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/components/image_path.dart';
-import 'package:merchendise_galaxy/components/my_button.dart';
+import 'package:merchendise_galaxy/components/my_button2.dart';
 import 'package:merchendise_galaxy/components/my_texfield.dart';
 import 'package:merchendise_galaxy/components/my_textfield1.dart';
 
@@ -17,44 +17,50 @@ class registerPage extends StatefulWidget {
 
 class _registerPageState extends State<registerPage> {
 //text editing controller
+  final namecontroller = TextEditingController();
   final usernamecontroller = TextEditingController();
 
   final passwordcontroller = TextEditingController();
-
+  final confirmpasswordcontroller = TextEditingController();
 //sign user in method
   void signinuser() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey.shade300,
+      backgroundColor: Colors.blueGrey.shade200,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 30),
+                const SizedBox(height: 10),
 
                 //logo
-                const Icon(
-                  Icons.lock,
-                  size: 100,
+                Image.asset(
+                  'lib/images/logo1.png',
+                  height: 105,
+                  // width: 100,
                 ),
-                const SizedBox(height: 20),
+                /* const Icon(
+                  Icons.lock,
+                  size: 65,
+                ),*/
+                const SizedBox(height: 10),
 
                 const Text(
                   'Let\'s create an account',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 22.5,
                   ),
                 ),
 
-                const SizedBox(height: 25),
+                const SizedBox(height: 20),
                 //name field
                 Mytextfield(
-                  controller: usernamecontroller,
+                  controller: namecontroller,
                   hintText: 'Name',
                   obscureText: false,
                 ),
@@ -77,13 +83,13 @@ class _registerPageState extends State<registerPage> {
                 const SizedBox(height: 20),
                 //confirm password text field
                 Mytextfield1(
-                  controller: passwordcontroller,
+                  controller: confirmpasswordcontroller,
                   hintText: 'Confirm Password',
                 ),
 
                 const SizedBox(height: 20),
                 //sign in button
-                Mybutton(
+                Mybutton1(
                   onTap: () => Navigator.pushNamed(context, '/product_page'),
                 ),
 
@@ -119,7 +125,7 @@ class _registerPageState extends State<registerPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
                 //google + apple sign in button
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -136,7 +142,7 @@ class _registerPageState extends State<registerPage> {
                     Imagepath(image: 'lib/images/apple.png'),
                   ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

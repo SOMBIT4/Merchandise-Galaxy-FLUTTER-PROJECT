@@ -25,21 +25,23 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey.shade300,
+      backgroundColor: Colors.blueGrey.shade200,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
+                const SizedBox(height: 10),
 
                 //logo
-                const Icon(
+                Image.asset('lib/images/logo1.png', height: 180),
+                /* const Icon(
                   Icons.lock,
                   size: 100,
-                ),
-                const SizedBox(height: 50),
+                ),*/
+
+                const SizedBox(height: 30),
 
                 const Text(
                   'Welcome back you\'ve been missed!',
@@ -71,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                       ]),
                 ),
           */
-                const SizedBox(height: 25),
+                const SizedBox(height: 20),
                 //password text field
                 Mytextfield1(
                   controller: passwordcontroller,
@@ -112,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),*/
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
                 //sign in button
                 Mybutton(
                   onTap: () => Navigator.pushNamed(context, '/product_page'),
