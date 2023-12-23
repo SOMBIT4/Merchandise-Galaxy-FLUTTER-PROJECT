@@ -6,8 +6,7 @@ import 'package:merchendise_galaxy/components/my_textfield1.dart';
 import 'package:merchendise_galaxy/components/register_button.dart';
 
 class LoginPage extends StatefulWidget {
-  //final Function()? onTap;
-  LoginPage({super.key /*,required this.onTap*/});
+  LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -36,10 +35,6 @@ class _LoginPageState extends State<LoginPage> {
 
                 //logo
                 Image.asset('lib/images/logo1.png', height: 180),
-                /* const Icon(
-                  Icons.lock,
-                  size: 100,
-                ),*/
 
                 const SizedBox(height: 30),
 
@@ -97,23 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                //remember me
-                //const SizedBox(height: 0),
-                /*   const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    children: [
-                      Icon(Icons.check_box_outline_blank),
-                      Text(
-                        'Remember me',
-                        style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),*/
+
                 const SizedBox(height: 15),
                 //sign in button
                 Mybutton(
@@ -165,8 +144,8 @@ class _LoginPageState extends State<LoginPage> {
                     Imagepath(image: 'lib/images/facebook.png'),
 
                     SizedBox(width: 25),
-                    //apple
-                    Imagepath(image: 'lib/images/apple.png'),
+                    //twitter
+                    Imagepath(image: 'lib/images/twitter.png'),
                   ],
                 ),
                 const SizedBox(height: 30),

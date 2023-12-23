@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "887917938524",
+    "project_id": "merchendise-galaxy",
+    "storage_bucket": "merchendise-galaxy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887917938524:android:c9e9e06d62919b8de6a399",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBviwGHwBeUELJ-ucYG4HWuk9lEnddS7SI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

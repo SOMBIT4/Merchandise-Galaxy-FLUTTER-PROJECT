@@ -1,14 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/components/image_path.dart';
 import 'package:merchendise_galaxy/components/my_button2.dart';
 import 'package:merchendise_galaxy/components/my_texfield.dart';
 import 'package:merchendise_galaxy/components/my_textfield1.dart';
+import 'package:merchendise_galaxy/user_auth/firebase_auth_services.dart';
 
 class registerPage extends StatefulWidget {
-  // final Function()? onTap;
   registerPage({
     super.key,
-    /*required this.onTap*/
   });
 
   @override
@@ -16,16 +17,23 @@ class registerPage extends StatefulWidget {
 }
 
 class _registerPageState extends State<registerPage> {
+  final Firebaseauthservice _auth = Firebaseauthservice();
 //text editing controller
   final namecontroller = TextEditingController();
   final usernamecontroller = TextEditingController();
 
   final passwordcontroller = TextEditingController();
   final confirmpasswordcontroller = TextEditingController();
-//sign user in method
-  void signinuser() {}
 
   @override
+  void dispose() {
+    namecontroller.dispose();
+    usernamecontroller.dispose();
+    passwordcontroller.dispose();
+    confirmpasswordcontroller.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey.shade200,
@@ -43,10 +51,7 @@ class _registerPageState extends State<registerPage> {
                   height: 105,
                   // width: 100,
                 ),
-                /* const Icon(
-                  Icons.lock,
-                  size: 65,
-                ),*/
+
                 const SizedBox(height: 10),
 
                 const Text(
@@ -88,9 +93,9 @@ class _registerPageState extends State<registerPage> {
                 ),
 
                 const SizedBox(height: 20),
-                //sign in button
+                //sign up button
                 Mybutton1(
-                  onTap: () => Navigator.pushNamed(context, '/product_page'),
+                  onTap: signup,
                 ),
 
                 const SizedBox(height: 20),
@@ -138,8 +143,8 @@ class _registerPageState extends State<registerPage> {
                     Imagepath(image: 'lib/images/facebook.png'),
 
                     SizedBox(width: 25),
-                    //apple
-                    Imagepath(image: 'lib/images/apple.png'),
+                    //twitter
+                    Imagepath(image: 'lib/images/twitter.png'),
                   ],
                 ),
                 const SizedBox(height: 30),
@@ -171,5 +176,27 @@ class _registerPageState extends State<registerPage> {
         ),
       ),
     );
+  }
+
+  void signup() async {
+    String name = namecontroller.text;
+    String email = usernamecontroller.text;
+    String password = passwordcontroller.text;
+    String conpassword = confirmpasswordcontroller.text;
+
+    if (namecontroller.text.isNotEmpty &&
+        usernamecontroller.text.isNotEmpty &&
+        passwordcontroller.text.isNotEmpty &&
+        confirmpasswordcontroller.text.isNotEmpty) {
+      if (passwordcontroller.text == confirmpasswordcontroller.text) {
+        await _auth.signupwithemailandpassword(email, password);
+        print("Password  match");
+        Navigator.pushNamed(context, '/product_page');
+      } else {
+        print("Password don't  match");
+      }
+    } else {
+      print("Some error occured");
+    }
   }
 }
