@@ -27,10 +27,13 @@ class BottomNavigationState extends State<BottomNavigation> {
       backgroundColor: Colors.transparent,
       buttonBackgroundColor: Colors.grey.shade500,
       index: _selectedIndex,
+
       height: 65,
       color: Color.fromARGB(129, 165, 160, 160),
       animationCurve: Curves.easeInOut,
       animationDuration: Duration(milliseconds: 350),
+
+     
       items: [
         Icon(
           Icons.home,

@@ -77,13 +77,24 @@ class ProductListTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               MyButton(
-                  onTap: () {},
+                  onTap: () {
+                     ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                        content: Text(
+                          'Product added',
+                          ),
+                          backgroundColor: Colors.purple,
+                         ),
+                        );
+                    
+                  },
                   child: Text(
                     "Add To Cart",
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
                           color: AppColor.whiteColor,
                           fontWeight: FontWeight.w400,
                         ),
+                        
                   )),
             ],
           )

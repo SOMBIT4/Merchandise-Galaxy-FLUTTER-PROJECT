@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/pages/bottom_navbar.dart';
+import 'package:merchendise_galaxy/pages/my_cart.dart';
 import 'package:merchendise_galaxy/re_useable/showProduct.dart';
 import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
@@ -12,6 +13,15 @@ class ProductPage extends StatefulWidget {
 }
 
 class _HomePageState extends State<ProductPage> {
+
+  void _navigateToMyCart() {
+ 
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MyCart()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,9 +105,12 @@ class _HomePageState extends State<ProductPage> {
                     const SizedBox(
                       width: 15,
                     ),
-                    const Icon(
-                      Icons.shopping_cart_outlined,
-                      size: 42,
+                     GestureDetector(
+                      onTap: _navigateToMyCart,
+                      child: const Icon(
+                        Icons.shopping_cart_outlined,
+                        size: 42,
+                      ),
                     ),
                   ],
                 ),
