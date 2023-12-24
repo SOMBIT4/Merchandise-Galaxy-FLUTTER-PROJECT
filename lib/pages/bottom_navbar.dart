@@ -16,6 +16,7 @@ class BottomNavigationState extends State<BottomNavigation> {
     ProductPage(),
     LoginPage(),
     PaymentPage(),
+    PaymentPage(),
   ];
 
   int _selectedIndex = 0;
@@ -23,22 +24,29 @@ class BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
+      backgroundColor: Colors.transparent,
+      buttonBackgroundColor: Colors.grey.shade500,
       index: _selectedIndex,
-      backgroundColor: Colors.white,
-      color: Colors.black,
-      animationDuration: Duration(milliseconds: 250),
+      height: 65,
+      color: Color.fromARGB(129, 165, 160, 160),
+      animationCurve: Curves.easeInOut,
+      animationDuration: Duration(milliseconds: 350),
       items: [
         Icon(
           Icons.home,
-          color: Colors.greenAccent,
+          color: Color.fromARGB(255, 0, 0, 0),
         ),
         Icon(
           Icons.favorite,
-          color: Colors.greenAccent,
+          color: Color.fromARGB(255, 0, 0, 0),
         ),
         Icon(
-          Icons.payment,
-          color: Colors.greenAccent,
+          Icons.location_on,
+          color: const Color.fromARGB(255, 0, 0, 0),
+        ),
+        Icon(
+          Icons.person,
+          color: const Color.fromARGB(255, 0, 0, 0),
         ),
       ],
       onTap: (index) {
