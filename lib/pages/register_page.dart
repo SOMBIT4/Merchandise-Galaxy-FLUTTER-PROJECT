@@ -144,7 +144,7 @@ class _registerPageState extends State<registerPage> {
 
                     SizedBox(width: 25),
                     //twitter
-                    Imagepath(image: 'lib/images/twitter.png'),
+                    Imagepath(image: 'lib/images/twitter1.png'),
                   ],
                 ),
                 const SizedBox(height: 30),
@@ -183,7 +183,15 @@ class _registerPageState extends State<registerPage> {
     String email = usernamecontroller.text;
     String password = passwordcontroller.text;
     String conpassword = confirmpasswordcontroller.text;
-
+//show loading circle
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+    //sign up
     if (namecontroller.text.isNotEmpty &&
         usernamecontroller.text.isNotEmpty &&
         passwordcontroller.text.isNotEmpty &&
@@ -194,9 +202,43 @@ class _registerPageState extends State<registerPage> {
         Navigator.pushNamed(context, '/product_page');
       } else {
         print("Password don't  match");
+        Navigator.pop(context);
+        passworddontmatchmessage();
       }
     } else {
       print("Some error occured");
+      Navigator.pop(context);
+      fillfieldmessage();
     }
+  }
+
+  void passworddontmatchmessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          backgroundColor: Colors.deepPurple,
+          title: Text(
+            'Password Don\'t  Match',
+            style: TextStyle(color: Colors.white),
+          ),
+        );
+      },
+    );
+  }
+
+  void fillfieldmessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          backgroundColor: Colors.deepPurple,
+          title: Text(
+            'You Must Fill Up All The Fields',
+            style: TextStyle(color: Colors.white),
+          ),
+        );
+      },
+    );
   }
 }
