@@ -198,9 +198,14 @@ class _registerPageState extends State<registerPage> {
         passwordcontroller.text.isNotEmpty &&
         confirmpasswordcontroller.text.isNotEmpty) {
       if (passwordcontroller.text == confirmpasswordcontroller.text) {
-        await _auth.signupwithemailandpassword(email, password);
-        print("Password  match");
-        Navigator.pushNamed(context, '/product_page');
+        User? user = await _auth.signupwithemailandpassword(email, password);
+        if (user != null) {
+          print("Password  match");
+          Navigator.pushNamed(context, '/product_page');
+        } else {
+          Navigator.pop(context);
+          alreayregistermessage();
+        }
       } else {
         print("Password don't  match");
         Navigator.pop(context);
@@ -236,6 +241,21 @@ class _registerPageState extends State<registerPage> {
           backgroundColor: Colors.deepPurple,
           title: Text(
             'You Must Fill Up All The Fields',
+            style: TextStyle(color: Colors.white),
+          ),
+        );
+      },
+    );
+  }
+
+  void alreayregistermessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          backgroundColor: Colors.deepPurple,
+          title: Text(
+            'This Email is already registered',
             style: TextStyle(color: Colors.white),
           ),
         );

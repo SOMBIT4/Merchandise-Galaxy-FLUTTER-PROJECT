@@ -14,6 +14,7 @@ class Forgetpasswordpage extends StatefulWidget {
 }
 
 class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
+  final Firebaseauthservice _auth = Firebaseauthservice();
   final _emailcontroller = TextEditingController();
 
   @override
@@ -79,7 +80,7 @@ class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
   }
 
   Future passwordreset() async {
-    try {
+    /*   try {
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: _emailcontroller.text.trim());
 
@@ -95,7 +96,7 @@ class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
           );
         },
       );
-    } on FirebaseAuthException catch (e) {
+    } catch (e) {
       /* Fluttertoast.showToast(
           msg: error.message.toString(), gravity: ToastGravity.TOP);*/
       showDialog(
@@ -104,12 +105,55 @@ class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
           return AlertDialog(
             backgroundColor: Colors.deepPurple,
             content: Text(
-              e.message.toString(),
+              'email not registered',
               style: TextStyle(color: Colors.white),
             ),
           );
         },
       );
+    }*/
+
+    String email = _emailcontroller.text;
+    if (_emailcontroller.text.isNotEmpty) {
+      if (await _auth.signinwithemailandpassword(email, 'password') != null) {
+        emailnotfoundmessage();
+      } else {
+        await FirebaseAuth.instance
+            .sendPasswordResetEmail(email: _emailcontroller.text.trim());
+        // emailfoundmessage();
+      }
+    } else {
+      emailnotfoundmessage();
     }
+  }
+
+  void emailnotfoundmessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          backgroundColor: Colors.deepPurple,
+          title: Text(
+            'This Email is not registered',
+            style: TextStyle(color: Colors.white),
+          ),
+        );
+      },
+    );
+  }
+
+  void emailfoundmessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          backgroundColor: Colors.deepPurple,
+          title: Text(
+            'This Email is  found',
+            style: TextStyle(color: Colors.white),
+          ),
+        );
+      },
+    );
   }
 }

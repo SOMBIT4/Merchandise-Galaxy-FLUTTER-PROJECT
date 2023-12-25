@@ -11,8 +11,8 @@ class Firebaseauthservice {
       return credential.user;
     } catch (e) {
       print("Some error occured");
+      return null;
     }
-    return null;
   }
 
   //signin method
