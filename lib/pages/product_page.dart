@@ -4,6 +4,7 @@ import 'package:merchendise_galaxy/pages/my_cart.dart';
 import 'package:merchendise_galaxy/re_useable/showProduct.dart';
 import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
+import 'package:merchendise_galaxy/res/components/dummy_products.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -13,9 +14,7 @@ class ProductPage extends StatefulWidget {
 }
 
 class _HomePageState extends State<ProductPage> {
-
   void _navigateToMyCart() {
- 
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => MyCart()),
@@ -105,7 +104,7 @@ class _HomePageState extends State<ProductPage> {
                     const SizedBox(
                       width: 15,
                     ),
-                     GestureDetector(
+                    GestureDetector(
                       onTap: _navigateToMyCart,
                       child: const Icon(
                         Icons.shopping_cart_outlined,
@@ -130,14 +129,19 @@ class _HomePageState extends State<ProductPage> {
                 SizedBox(
                   height: 262,
                   child: ListView.separated(
-                    itemCount: 5,
+                    itemCount: DummyFoodProducts.exploreList.length,
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     separatorBuilder: (context, index) => const SizedBox(
                       width: 16,
                     ),
                     itemBuilder: (context, index) {
-                      return const ProductListTile();
+                      var foodProduct = DummyFoodProducts.exploreList[index];
+                      return ProductListTile(
+                        productName: foodProduct.productName,
+                        price: foodProduct.price,
+                        image: foodProduct.productImage,
+                      );
                     },
                   ),
                 ),
@@ -157,14 +161,19 @@ class _HomePageState extends State<ProductPage> {
                 SizedBox(
                   height: 262,
                   child: ListView.separated(
-                    itemCount: 5,
+                    itemCount: DummyPoloProducts.exploreList.length,
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     separatorBuilder: (context, index) => const SizedBox(
                       width: 16,
                     ),
                     itemBuilder: (context, index) {
-                      return const ProductListTile();
+                      var poloProduct = DummyPoloProducts.exploreList[index];
+                      return ProductListTile(
+                        image: poloProduct.productImage,
+                        price: poloProduct.price,
+                        productName: poloProduct.productName,
+                      );
                     },
                   ),
                 ),
@@ -184,14 +193,19 @@ class _HomePageState extends State<ProductPage> {
                 SizedBox(
                   height: 262,
                   child: ListView.separated(
-                    itemCount: 5,
+                    itemCount: DummyTshirtProducts.exploreList.length,
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     separatorBuilder: (context, index) => const SizedBox(
                       width: 16,
                     ),
                     itemBuilder: (context, index) {
-                      return const ProductListTile();
+                      var tProduct = DummyTshirtProducts.exploreList[index];
+                      return ProductListTile(
+                        price: tProduct.price,
+                        productName: tProduct.productName,
+                        image: tProduct.productImage,
+                      );
                     },
                   ),
                 ),

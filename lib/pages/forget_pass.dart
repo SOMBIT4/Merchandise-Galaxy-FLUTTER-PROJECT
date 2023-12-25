@@ -1,7 +1,8 @@
 import 'dart:math';
-
+import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:merchendise_galaxy/components/my_button.dart';
 import 'package:merchendise_galaxy/user_auth/firebase_auth_services.dart';
 
@@ -13,7 +14,6 @@ class Forgetpasswordpage extends StatefulWidget {
 }
 
 class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
-  // final Firebaseauthservice _auth = Firebaseauthservice();
   final _emailcontroller = TextEditingController();
 
   @override
@@ -73,37 +73,6 @@ class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
             ),
             color: Color.fromARGB(255, 170, 126, 246),
           ),
-          /*Mybutton(onTap: () {
-            FirebaseAuth.instance
-                .sendPasswordResetEmail(email: _emailcontroller.text.toString())
-                .then((value) {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    backgroundColor: Colors.deepPurple,
-                    content: Text(
-                      'The Email is found',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  );
-                },
-              );
-            }).onError((error, stackTrace) {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    backgroundColor: Colors.deepPurple,
-                    content: Text(
-                      'The Email is not found',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  );
-                },
-              );
-            });
-          })*/
         ],
       ),
     );
@@ -113,6 +82,7 @@ class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
     try {
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: _emailcontroller.text.trim());
+
       showDialog(
         context: context,
         builder: (context) {
@@ -126,7 +96,8 @@ class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
         },
       );
     } on FirebaseAuthException catch (e) {
-      print(e);
+      /* Fluttertoast.showToast(
+          msg: error.message.toString(), gravity: ToastGravity.TOP);*/
       showDialog(
         context: context,
         builder: (context) {
@@ -140,32 +111,5 @@ class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
         },
       );
     }
-    //String email = _emailcontroller.text;
-    /* User? user = await _auth.resetpassword(email);
-    if (user != null) {
-      print('error happend');
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-              backgroundColor: Colors.deepPurple,
-            content: Text('The Email can\'t be found'
-            ,style: TextStyle(color: Colors.white),),
-          );
-        },
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-              backgroundColor: Colors.deepPurple,
-            content: Text('The Email is found',
-            style: TextStyle(color: Colors.white),
-            ),
-          );
-        },
-      );
-    }*/
   }
 }

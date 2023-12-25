@@ -158,9 +158,7 @@ class _registerPageState extends State<registerPage> {
                       ),
                     ),
                     const SizedBox(width: 4),
-                    // GestureDetector(
-                    // onTap: widget.onTap,
-                    /*child: */ GestureDetector(
+                    GestureDetector(
                       onTap: () => Navigator.pushNamedAndRemoveUntil(
                           context, '/login_page', (route) => false),
                       child: const Text(
@@ -171,7 +169,6 @@ class _registerPageState extends State<registerPage> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    // ),
                   ],
                 )
               ],

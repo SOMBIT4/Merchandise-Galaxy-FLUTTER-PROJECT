@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-
 import 'package:merchendise_galaxy/buttons/my_small_button.dart';
-import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
 
 class ProductListTile extends StatelessWidget {
-  const ProductListTile({super.key});
+  const ProductListTile(
+      {super.key,
+      required this.image,
+      required this.productName,
+      required this.price});
+
+  final String productName;
+  final String image;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +30,7 @@ class ProductListTile extends StatelessWidget {
             child: AspectRatio(
               aspectRatio: 2 / 1.75,
               child: Image.asset(
-                AppAssets.foodBurger,
+                image,
                 fit: BoxFit.fill,
               ),
             ),
@@ -33,7 +39,7 @@ class ProductListTile extends StatelessWidget {
             height: 8,
           ),
           Text(
-            'Name',
+            productName,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
@@ -63,7 +69,7 @@ class ProductListTile extends StatelessWidget {
                 width: 2,
               ),
               Text(
-                '\$280',
+                '\$$price',
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
@@ -78,15 +84,14 @@ class ProductListTile extends StatelessWidget {
             children: [
               MyButton(
                   onTap: () {
-                     ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
                         content: Text(
                           'Product added',
-                          ),
-                          backgroundColor: Colors.purple,
-                         ),
-                        );
-                    
+                        ),
+                        backgroundColor: Colors.purple,
+                      ),
+                    );
                   },
                   child: Text(
                     "Add To Cart",
@@ -94,7 +99,6 @@ class ProductListTile extends StatelessWidget {
                           color: AppColor.whiteColor,
                           fontWeight: FontWeight.w400,
                         ),
-                        
                   )),
             ],
           )
