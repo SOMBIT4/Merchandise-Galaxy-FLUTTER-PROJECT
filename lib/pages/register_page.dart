@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/components/image_path.dart';
 import 'package:merchendise_galaxy/components/my_button2.dart';
@@ -180,10 +179,8 @@ class _registerPageState extends State<registerPage> {
   }
 
   void signup() async {
-    String name = namecontroller.text;
     String email = usernamecontroller.text;
     String password = passwordcontroller.text;
-    String conpassword = confirmpasswordcontroller.text;
 //show loading circle
     showDialog(
         context: context,
