@@ -23,6 +23,7 @@ void main() async {
       debugShowCheckedModeBanner: false,
       home: LoginPage(),
       routes: {
+        '/login_page': (context) => LoginPage(),
         '/product_page': (context) => const ProductPage(),
         '/register_page': (context) => registerPage(),
         '/buttomNavigation': (context) => const BottomNavigation(),

@@ -5,6 +5,7 @@ import 'package:merchendise_galaxy/components/my_button.dart';
 import 'package:merchendise_galaxy/components/my_texfield.dart';
 import 'package:merchendise_galaxy/components/my_textfield1.dart';
 import 'package:merchendise_galaxy/components/register_button.dart';
+import 'package:merchendise_galaxy/pages/forget_pass.dart';
 import 'package:merchendise_galaxy/user_auth/firebase_auth_services.dart';
 
 class LoginPage extends StatefulWidget {
@@ -75,16 +76,29 @@ class _LoginPageState extends State<LoginPage> {
 
                 //forgot password
                 const SizedBox(height: 10),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 17,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return Forgetpasswordpage();
+                              },
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],

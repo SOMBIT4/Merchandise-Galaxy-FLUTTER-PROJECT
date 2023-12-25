@@ -160,12 +160,16 @@ class _registerPageState extends State<registerPage> {
                     const SizedBox(width: 4),
                     // GestureDetector(
                     // onTap: widget.onTap,
-                    /*child: */ const Text(
-                      'Login now',
-                      style: TextStyle(
-                          color: Colors.deepPurple,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold),
+                    /*child: */ GestureDetector(
+                      onTap: () => Navigator.pushNamedAndRemoveUntil(
+                          context, '/login_page', (route) => false),
+                      child: const Text(
+                        'Login now',
+                        style: TextStyle(
+                            color: Colors.deepPurple,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                     // ),
                   ],
