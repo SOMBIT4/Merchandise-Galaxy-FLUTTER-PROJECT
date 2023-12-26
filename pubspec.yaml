@@ -87,7 +87,7 @@ flutter:
   fonts:
     - family: Fontmain
       fonts:
-        - asset: lib/fonts/AlegreyaSansSC-Medium.ttf
+        - asset: lib/fonts/Algerian-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

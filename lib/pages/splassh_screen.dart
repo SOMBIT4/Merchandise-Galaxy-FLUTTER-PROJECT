@@ -57,7 +57,7 @@ class _splashscreenState extends State<splashscreen>
             ),
             //text
             Container(
-              padding: const EdgeInsets.only(left: 130),
+              padding: const EdgeInsets.only(left: 120),
               child: Text(
                 'Galaxy',
                 style: TextStyle(
