@@ -31,9 +31,6 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-//sign user in method
-  void signinuser() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -3,6 +3,7 @@ import 'package:merchendise_galaxy/pages/bottom_navbar.dart';
 import 'package:merchendise_galaxy/pages/product_page.dart';
 import 'package:merchendise_galaxy/pages/register_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:merchendise_galaxy/pages/splassh_screen.dart';
 import 'pages/login_pages.dart';
 import 'dart:io';
 
@@ -20,7 +21,7 @@ void main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: splashscreen(),
       routes: {
         '/login_page': (context) => LoginPage(),
         '/product_page': (context) => const ProductPage(),
