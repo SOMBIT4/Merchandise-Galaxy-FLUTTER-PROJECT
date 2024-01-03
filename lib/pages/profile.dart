@@ -6,7 +6,6 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -24,11 +23,14 @@ class Profile extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         children: [
           Column(
+            
             children: const [
               CircleAvatar(
-                radius: 50,
+                
+                radius: 80,
                 backgroundImage: AssetImage("assets/img/profile.png"),
               ),
+
               SizedBox(height: 10),
               Text(
                 "Ibrahim Emon",
@@ -79,6 +81,22 @@ class Profile extends StatelessWidget {
               );
 
             }),
+          ),
+          const SizedBox(height: 10),
+          ...List.generate(
+            5, 
+          (index){
+            return const Card(
+              elevation: 4,
+              shadowColor: Colors.black12,
+              child: ListTile(
+                leading: Icon(Icons.notification_add),
+                title: Text("Notifications"),
+                trailing: Icon(Icons.chevron_right),
+              ),
+            );
+
+          },
           )
         ],
       ),
