@@ -1,6 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:merchendise_galaxy/pages/profile_list_tile.dart';
 
 class Profile extends StatelessWidget {
   @override
@@ -82,17 +83,26 @@ class Profile extends StatelessWidget {
 
             }),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 35),
           ...List.generate(
-            5, 
+            customListTiles.length, 
           (index){
-            return const Card(
-              elevation: 4,
-              shadowColor: Colors.black12,
-              child: ListTile(
-                leading: Icon(Icons.notification_add),
-                title: Text("Notifications"),
-                trailing: Icon(Icons.chevron_right),
+            final tile = customListTiles[index];
+            return  Padding(
+              padding: const EdgeInsets.only(top:20),
+              child: Card(
+                elevation: 4,
+                shadowColor: Colors.black12,
+                child: ListTile(
+                  leading: Icon(tile.icon),
+                  title: Text(
+                    tile.title,
+                    style: TextStyle(
+                      color: index ==3 ?Colors.red : Colors.black,
+                    ),
+                  ),
+                  trailing: Icon(Icons.chevron_right),
+                ),
               ),
             );
 
