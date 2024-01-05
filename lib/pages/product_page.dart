@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/pages/bottom_navbar.dart';
 import 'package:merchendise_galaxy/pages/my_cart.dart';
+import 'package:merchendise_galaxy/pages/profile.dart';
 import 'package:merchendise_galaxy/re_useable/showProduct.dart';
 import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
@@ -18,6 +19,12 @@ class _HomePageState extends State<ProductPage> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => MyCart()),
+    );
+  }
+  void _navigateToProfile() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Profile()), // Replace BlankPage with the actual blank page you want to navigate to
     );
   }
 
@@ -45,20 +52,22 @@ class _HomePageState extends State<ProductPage> {
                       width: 42,
                       fit: BoxFit.contain,
                     ),
-                    Container(
-                      height: 40,
-                      width: 44,
-                      //  margin: EdgeInsets.only(top: 40),
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: AppColor.buttonColor,
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child: const Icon(
-                        Icons.person,
-                        color: Colors.white,
-                      ),
+                    GestureDetector(
+                  onTap: _navigateToProfile,
+                  child: Container(
+                    height: 40,
+                    width: 44,
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColor.buttonColor,
+                      borderRadius: BorderRadius.circular(15.0),
                     ),
+                    child: const Icon(
+                      Icons.person_2,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
                   ],
                 ),
                 const SizedBox(
