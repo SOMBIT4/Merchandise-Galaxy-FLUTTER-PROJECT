@@ -71,6 +71,7 @@ flutter:
    - assets/img/food/
    - assets/img/polo_tshirt/
    - assets/img/tshirt/
+   - assets/img/profile.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
