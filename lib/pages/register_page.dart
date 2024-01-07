@@ -252,7 +252,7 @@ class _registerPageState extends State<registerPage> {
         return const AlertDialog(
           backgroundColor: Colors.deepPurple,
           title: Text(
-            'This Email is already registered',
+            'Ethier this Email is already registered or the password is too short.Please!Enter a 6 digit password',
             style: TextStyle(color: Colors.white),
           ),
         );
