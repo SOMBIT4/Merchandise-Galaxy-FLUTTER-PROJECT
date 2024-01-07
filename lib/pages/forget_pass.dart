@@ -78,9 +78,10 @@ class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
       ),
     );
   }
-//problem cant catch the error and cant make if true 
+
+//problem cant catch the error and cant make if true
   Future passwordreset() async {
-    /*   try {
+    try {
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: _emailcontroller.text.trim());
 
@@ -90,13 +91,14 @@ class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
           return AlertDialog(
             backgroundColor: Colors.deepPurple,
             content: Text(
-              'The Email is be found',
+              'Link has been sent if email exist',
               style: TextStyle(color: Colors.white),
             ),
           );
         },
       );
     } catch (e) {
+      print(e);
       /* Fluttertoast.showToast(
           msg: error.message.toString(), gravity: ToastGravity.TOP);*/
       showDialog(
@@ -105,14 +107,14 @@ class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
           return AlertDialog(
             backgroundColor: Colors.deepPurple,
             content: Text(
-              'email not registered',
+              'Invalid email',
               style: TextStyle(color: Colors.white),
             ),
           );
         },
       );
-    }*/
-
+    }
+/*
     String email = _emailcontroller.text;
     if (_emailcontroller.text.isNotEmpty) {
       if (await _auth.signinwithemailandpassword(email, 'password') != null) {
@@ -155,5 +157,6 @@ class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
         );
       },
     );
+  }*/
   }
 }

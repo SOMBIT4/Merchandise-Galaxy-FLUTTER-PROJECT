@@ -21,7 +21,7 @@ void main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:  LoginPage() ,
+      home: splashscreen(),
       routes: {
         '/login_page': (context) => LoginPage(),
         '/product_page': (context) => const ProductPage(),

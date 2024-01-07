@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 class CustomListTile {
   final IconData icon;
   final String title;
@@ -10,18 +11,18 @@ class CustomListTile {
 }
 
 List<CustomListTile> customListTiles = [
-  CustomListTile(
+  /*CustomListTile(
     icon: Icons.insights,
     title: "Activity",
-  ),
+  ),*/
   CustomListTile(
     icon: Icons.location_on_outlined,
     title: "Location",
   ),
-  CustomListTile(
+  /* CustomListTile(
     title: "Notifications",
     icon: CupertinoIcons.bell,
-  ),
+  ),*/
   CustomListTile(
     title: "Logout",
     icon: CupertinoIcons.arrow_right_arrow_left,
