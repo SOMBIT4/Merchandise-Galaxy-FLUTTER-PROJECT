@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';
-import 'package:merchendise_galaxy/res/colors/app_color.dart';
 
 class ProfileInfo extends StatelessWidget {
   const ProfileInfo({super.key});
