@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/pages/bottom_navbar.dart';
 import 'package:merchendise_galaxy/pages/product_page.dart';
+import 'package:merchendise_galaxy/pages/profile/profile_info.dart';
+import 'package:merchendise_galaxy/pages/profile/profile_update.dart';
 import 'package:merchendise_galaxy/pages/register_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:merchendise_galaxy/pages/splassh_screen.dart';
@@ -27,6 +29,8 @@ void main() async {
         '/product_page': (context) => const ProductPage(),
         '/register_page': (context) => registerPage(),
         '/buttomNavigation': (context) => const BottomNavigation(),
+        '/updateProfile': (context) => const UpdateProfileScreen(),
+        '/profileInfo': (context) => const ProfileInfo(),
       },
     ),
   );

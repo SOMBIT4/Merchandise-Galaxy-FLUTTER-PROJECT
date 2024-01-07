@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:merchendise_galaxy/user_auth/firebase_auth_services.dart';
 
 class Forgetpasswordpage extends StatefulWidget {
   const Forgetpasswordpage({super.key});
@@ -11,7 +10,6 @@ class Forgetpasswordpage extends StatefulWidget {
 }
 
 class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
-  final Firebaseauthservice _auth = Firebaseauthservice();
   final _emailcontroller = TextEditingController();
 
   @override

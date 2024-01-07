@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/pages/bottom_navbar.dart';
 import 'package:merchendise_galaxy/pages/my_cart.dart';
-import 'package:merchendise_galaxy/pages/profile.dart';
+import 'package:merchendise_galaxy/pages/profile/profile.dart';
 import 'package:merchendise_galaxy/re_useable/showProduct.dart';
 import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
@@ -21,10 +21,13 @@ class _HomePageState extends State<ProductPage> {
       MaterialPageRoute(builder: (context) => MyCart()),
     );
   }
+
   void _navigateToProfile() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Profile()), // Replace BlankPage with the actual blank page you want to navigate to
+      MaterialPageRoute(
+          builder: (context) =>
+              const ProfileScreen()), // Replace BlankPage with the actual blank page you want to navigate to
     );
   }
 
@@ -37,7 +40,7 @@ class _HomePageState extends State<ProductPage> {
         children: [
           SafeArea(
             minimum:
-                const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 45),
+                const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -45,29 +48,57 @@ class _HomePageState extends State<ProductPage> {
                   height: 5,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Image.asset(
-                      AppAssets.menuIcon,
-                      width: 42,
-                      fit: BoxFit.contain,
+                    Column(
+                      children: [
+                        Text(
+                          'Merchandise',
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontFamily: 'Fontmain',
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          'Galaxy',
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontFamily: 'Fontmain',
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 55,
                     ),
                     GestureDetector(
-                  onTap: _navigateToProfile,
-                  child: Container(
-                    height: 40,
-                    width: 44,
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: AppColor.buttonColor,
-                      borderRadius: BorderRadius.circular(15.0),
+                      onTap: _navigateToMyCart,
+                      child: const Icon(
+                        Icons.shopping_cart_outlined,
+                        size: 42,
+                      ),
                     ),
-                    child: const Icon(
-                      Icons.person_2,
-                      color: Colors.white,
+                    SizedBox(
+                      width: 8,
                     ),
-                  ),
-                ),
+                    GestureDetector(
+                      onTap: _navigateToProfile,
+                      child: Container(
+                        height: 40,
+                        width: 44,
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColor.buttonColor,
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: const Icon(
+                          Icons.person_2,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(
@@ -112,13 +143,6 @@ class _HomePageState extends State<ProductPage> {
                     ),
                     const SizedBox(
                       width: 15,
-                    ),
-                    GestureDetector(
-                      onTap: _navigateToMyCart,
-                      child: const Icon(
-                        Icons.shopping_cart_outlined,
-                        size: 42,
-                      ),
                     ),
                   ],
                 ),
