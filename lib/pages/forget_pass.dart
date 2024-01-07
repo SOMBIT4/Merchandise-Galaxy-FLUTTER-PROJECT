@@ -1,9 +1,6 @@
-import 'dart:math';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:merchendise_galaxy/components/my_button.dart';
 import 'package:merchendise_galaxy/user_auth/firebase_auth_services.dart';
 
 class Forgetpasswordpage extends StatefulWidget {
@@ -78,7 +75,8 @@ class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
       ),
     );
   }
-//problem cant catch the error and cant make if true 
+
+//problem cant catch the error and cant make if true
   Future passwordreset() async {
     /*   try {
       await FirebaseAuth.instance
