@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:merchendise_galaxy/components/image_path.dart';
 import 'package:merchendise_galaxy/components/my_button.dart';
 import 'package:merchendise_galaxy/components/my_texfield.dart';
@@ -142,19 +143,22 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 30),
                 //google + apple sign in button
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //google
-                    Imagepath(image: 'lib/images/google.png'),
+                    Imagepath(
+                        onTap: () => _signinGoogle(),
+                        image: 'lib/images/google.png'),
 
-                    SizedBox(width: 25),
+                    /* SizedBox(width: 25),
                     //fb
-                    Imagepath(image: 'lib/images/facebook.png'),
+                    Imagepath(onTap: () {}, image: 'lib/images/facebook.png'),
 
                     SizedBox(width: 25),
                     //twitter
-                    Imagepath(image: 'lib/images/twitter1.png'),
+                    Imagepath(onTap: () {}, image: 'lib/images/twitter1.png'),
+                  */
                   ],
                 ),
                 const SizedBox(height: 30),
@@ -217,5 +221,25 @@ class _LoginPageState extends State<LoginPage> {
         );
       },
     );
+  }
+
+  _signinGoogle() async {
+    final GoogleSignIn _googlesignin = GoogleSignIn();
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googlesignin.signIn();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken,
+        );
+        await FirebaseAuth.instance.signInWithCredential(credential);
+        Navigator.pushNamed(context, '/product_page');
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }

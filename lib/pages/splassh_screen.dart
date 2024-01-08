@@ -37,38 +37,40 @@ class _splashscreenState extends State<splashscreen>
       backgroundColor: AppColor.backGroundColor,
       body: Container(
         padding: const EdgeInsets.fromLTRB(10, 50, 20, 20),
-        child: Column(
-          children: [
-            Image.asset(
-              'lib/images/logo1.png',
-              height: 350,
-              width: 350,
-            ),
-            //text
-            Container(
-              padding: const EdgeInsets.only(left: 5, top: 40),
-              child: Text(
-                'Merchandise',
-                style: TextStyle(
-                    color: Colors.blue,
-                    fontFamily: 'Fontmain',
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Image.asset(
+                'lib/images/logo1.png',
+                height: 350,
+                width: 350,
               ),
-            ),
-            //text
-            Container(
-              padding: const EdgeInsets.only(left: 140, top: 10),
-              child: Text(
-                'Galaxy',
-                style: TextStyle(
-                    color: Colors.blue,
-                    fontFamily: 'Fontmain',
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold),
+              //text
+              Container(
+                padding: const EdgeInsets.only(left: 5, top: 40),
+                child: Text(
+                  'Merchandise',
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontFamily: 'Fontmain',
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-          ],
+              //text
+              Container(
+                padding: const EdgeInsets.only(left: 140, top: 10),
+                child: Text(
+                  'Galaxy',
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontFamily: 'Fontmain',
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

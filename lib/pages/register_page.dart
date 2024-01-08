@@ -131,19 +131,20 @@ class _registerPageState extends State<registerPage> {
                 ),
                 const SizedBox(height: 20),
                 //google + apple sign in button
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //google
-                    Imagepath(image: 'lib/images/google.png'),
+                    /* Imagepath(onTap: () {}, image: 'lib/images/google.png'),
 
                     SizedBox(width: 25),
                     //fb
-                    Imagepath(image: 'lib/images/facebook.png'),
+                    Imagepath(onTap: () {}, image: 'lib/images/facebook.png'),
 
                     SizedBox(width: 25),
                     //twitter
-                    Imagepath(image: 'lib/images/twitter1.png'),
+                    Imagepath(onTap: () {}, image: 'lib/images/twitter1.png'),
+                  */
                   ],
                 ),
                 const SizedBox(height: 30),

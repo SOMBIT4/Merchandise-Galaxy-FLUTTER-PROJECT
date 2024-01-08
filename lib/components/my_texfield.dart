@@ -20,6 +20,7 @@ class Mytextfield extends StatelessWidget {
         controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
+          //   label: Text('Gmail address'),
           contentPadding: EdgeInsets.all(15),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.black),

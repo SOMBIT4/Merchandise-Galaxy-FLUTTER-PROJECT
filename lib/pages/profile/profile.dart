@@ -1,11 +1,23 @@
+//import 'dart:js';
+
+//import 'dart:js';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+//import 'package:merchendise_galaxy/pages/login_pages.dart';
 import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   get left => null;
 
   @override
@@ -102,7 +114,9 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(
                 width: 200,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    logout();
+                  },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.whiteColor,
                       side: BorderSide.none,
@@ -141,5 +155,15 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  logout() async {
+    try {
+      await GoogleSignIn().signOut();
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushNamed(context, '/login_page');
+    } catch (e) {
+      print(e);
+    }
   }
 }
