@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:merchendise_galaxy/components/image_path.dart';
 import 'package:merchendise_galaxy/components/my_button2.dart';
 import 'package:merchendise_galaxy/components/my_texfield.dart';
 import 'package:merchendise_galaxy/components/my_textfield1.dart';
