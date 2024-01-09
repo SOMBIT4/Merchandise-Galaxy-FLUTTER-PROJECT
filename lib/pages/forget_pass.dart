@@ -94,6 +94,7 @@ class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
       );
     } catch (e) {
       print(e);
+
       /* Fluttertoast.showToast(
           msg: error.message.toString(), gravity: ToastGravity.TOP);*/
       showDialog(
@@ -102,13 +103,15 @@ class _ForgetpasswordpageState extends State<Forgetpasswordpage> {
           return AlertDialog(
             backgroundColor: Colors.deepPurple,
             content: Text(
-              'Invalid email',
+              //'Invalid email',
+              e.toString(),
               style: TextStyle(color: Colors.white),
             ),
           );
         },
       );
     }
+
 /*
     String email = _emailcontroller.text;
     if (_emailcontroller.text.isNotEmpty) {

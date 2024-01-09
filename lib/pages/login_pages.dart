@@ -200,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
     User? user = await _auth.signinwithemailandpassword(email, password);
     if (user != null) {
       print("user succesfully logined");
-      Navigator.pushNamed(context, '/product_page');
+      Navigator.pushReplacementNamed(context, '/product_page');
     } else {
       print("Some error occured");
       Navigator.pop(context);
@@ -215,7 +215,7 @@ class _LoginPageState extends State<LoginPage> {
         return const AlertDialog(
           backgroundColor: Colors.deepPurple,
           title: Text(
-            'Incorrect Email/Password',
+            'Incorrect Email/Password or Network Issue',
             style: TextStyle(color: Colors.white),
           ),
         );
@@ -225,6 +225,14 @@ class _LoginPageState extends State<LoginPage> {
 
   _signinGoogle() async {
     final GoogleSignIn _googlesignin = GoogleSignIn();
+    //show loading circle
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
     try {
       final GoogleSignInAccount? googleSignInAccount =
           await _googlesignin.signIn();
@@ -239,6 +247,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushNamed(context, '/product_page');
       }
     } catch (e) {
+      Navigator.pop(context);
       print(e);
     }
   }

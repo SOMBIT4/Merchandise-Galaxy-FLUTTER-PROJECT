@@ -161,7 +161,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     try {
       await GoogleSignIn().signOut();
       await FirebaseAuth.instance.signOut();
-      Navigator.pushNamed(context, '/login_page');
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/login_page', (route) => false);
     } catch (e) {
       print(e);
     }

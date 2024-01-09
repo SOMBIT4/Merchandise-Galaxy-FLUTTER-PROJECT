@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/components/image_path.dart';
 import 'package:merchendise_galaxy/components/my_button2.dart';
 import 'package:merchendise_galaxy/components/my_texfield.dart';
 import 'package:merchendise_galaxy/components/my_textfield1.dart';
+import 'package:merchendise_galaxy/components/my_textfield3.dart';
+import 'package:merchendise_galaxy/components/my_textfield4.dart';
 import 'package:merchendise_galaxy/user_auth/firebase_auth_services.dart';
 
 class registerPage extends StatefulWidget {
@@ -63,7 +66,7 @@ class _registerPageState extends State<registerPage> {
 
                 const SizedBox(height: 20),
                 //name field
-                Mytextfield(
+                Mytextfield3(
                   controller: namecontroller,
                   hintText: 'Name',
                   obscureText: false,
@@ -86,7 +89,7 @@ class _registerPageState extends State<registerPage> {
 
                 const SizedBox(height: 20),
                 //confirm password text field
-                Mytextfield1(
+                Mytextfield4(
                   controller: confirmpasswordcontroller,
                   hintText: 'Confirm Password',
                 ),
@@ -197,7 +200,11 @@ class _registerPageState extends State<registerPage> {
         confirmpasswordcontroller.text.isNotEmpty) {
       if (passwordcontroller.text == confirmpasswordcontroller.text) {
         User? user = await _auth.signupwithemailandpassword(email, password);
+
         if (user != null) {
+          //add user details
+          adduserdetails(namecontroller.text, usernamecontroller.text,
+              passwordcontroller.text);
           print("Password  match");
           Navigator.pushNamed(context, '/product_page');
         } else {
@@ -214,6 +221,14 @@ class _registerPageState extends State<registerPage> {
       Navigator.pop(context);
       fillfieldmessage();
     }
+  }
+
+  Future adduserdetails(String name, String email, String password) async {
+    await FirebaseFirestore.instance.collection('users').add({
+      'Name': name,
+      'Email': email,
+      'Password': password,
+    });
   }
 
   void passworddontmatchmessage() {
@@ -253,7 +268,7 @@ class _registerPageState extends State<registerPage> {
         return const AlertDialog(
           backgroundColor: Colors.deepPurple,
           title: Text(
-            'Ethier this Email is already registered or the password is too short.Please!Enter a 6 digit password',
+            'Ethier this Email is already registered or the password is too short. Please!Enter a 6 digit password or Network issue',
             style: TextStyle(color: Colors.white),
           ),
         );
