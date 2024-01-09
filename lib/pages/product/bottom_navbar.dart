@@ -1,9 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:merchendise_galaxy/pages/login_pages.dart';
-import 'package:merchendise_galaxy/pages/payment_page.dart';
+import 'package:merchendise_galaxy/pages/login_reg/login_pages.dart';
+import 'package:merchendise_galaxy/pages/product/payment_page.dart';
 
-import 'package:merchendise_galaxy/pages/product_page.dart';
+import 'package:merchendise_galaxy/pages/product/product_page.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});

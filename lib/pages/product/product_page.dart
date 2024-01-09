@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:merchendise_galaxy/pages/bottom_navbar.dart';
-import 'package:merchendise_galaxy/pages/my_cart.dart';
+import 'package:merchendise_galaxy/pages/product/bottom_navbar.dart';
+import 'package:merchendise_galaxy/pages/product/my_cart.dart';
 import 'package:merchendise_galaxy/pages/profile/profile.dart';
 import 'package:merchendise_galaxy/re_useable/showProduct.dart';
 import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';

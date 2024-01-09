@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:merchendise_galaxy/pages/login_pages.dart';
-import 'package:merchendise_galaxy/pages/product_page.dart';
+import 'package:merchendise_galaxy/pages/login_reg/login_pages.dart';
+import 'package:merchendise_galaxy/pages/product/product_page.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
 
 class splashscreen extends StatefulWidget {

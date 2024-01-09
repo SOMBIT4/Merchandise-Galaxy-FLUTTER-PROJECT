@@ -6,7 +6,7 @@ import 'package:merchendise_galaxy/components/my_button.dart';
 import 'package:merchendise_galaxy/components/my_texfield.dart';
 import 'package:merchendise_galaxy/components/my_textfield1.dart';
 import 'package:merchendise_galaxy/components/register_button.dart';
-import 'package:merchendise_galaxy/pages/forget_pass.dart';
+import 'package:merchendise_galaxy/pages/login_reg/forget_pass.dart';
 import 'package:merchendise_galaxy/user_auth/firebase_auth_services.dart';
 
 class LoginPage extends StatefulWidget {

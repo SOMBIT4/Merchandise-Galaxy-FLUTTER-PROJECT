@@ -1,4 +1,4 @@
-import 'package:merchendise_galaxy/pages/product_model.dart';
+import 'package:merchendise_galaxy/pages/product/product_model.dart';
 import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';
 
 class DummyFoodProducts {

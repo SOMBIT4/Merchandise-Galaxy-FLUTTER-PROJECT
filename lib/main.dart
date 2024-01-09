@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:merchendise_galaxy/pages/bottom_navbar.dart';
-import 'package:merchendise_galaxy/pages/product_page.dart';
+import 'package:merchendise_galaxy/pages/product/bottom_navbar.dart';
+import 'package:merchendise_galaxy/pages/product/product_page.dart';
 import 'package:merchendise_galaxy/pages/profile/profile_info.dart';
 import 'package:merchendise_galaxy/pages/profile/profile_update.dart';
-import 'package:merchendise_galaxy/pages/register_page.dart';
+import 'package:merchendise_galaxy/pages/login_reg/register_page.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:merchendise_galaxy/pages/splassh_screen.dart';
-import 'pages/login_pages.dart';
+import 'package:merchendise_galaxy/pages/login_reg/splassh_screen.dart';
+import 'pages/login_reg/login_pages.dart';
 import 'dart:io';
 
 void main() async {
