@@ -34,22 +34,22 @@ class DummyFoodProducts {
 class DummyPoloProducts {
   static List<ProductModel> exploreList = <ProductModel>[
     ProductModel(
-      productName: "Black Polo T-shirt",
+      productName: "Black Polo",
       productImage: AppAssets.poloBlack,
       price: '200',
     ),
     ProductModel(
-      productName: "Blue Polo T-shirt",
+      productName: "Blue Polo",
       productImage: AppAssets.poloBlue,
       price: '200',
     ),
     ProductModel(
-      productName: "Navy Blue Polo T-shirt",
+      productName: "Navy Blue Polo",
       productImage: AppAssets.poloNavyBlue,
       price: '200',
     ),
     ProductModel(
-      productName: "White Polo T-shirt",
+      productName: "White Polo",
       productImage: AppAssets.poloWhite,
       price: '200',
     ),

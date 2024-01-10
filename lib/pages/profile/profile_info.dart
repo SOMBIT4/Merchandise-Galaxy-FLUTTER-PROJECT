@@ -51,42 +51,42 @@ class _ProfileInfoState extends State<ProfileInfo> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // -- IMAGE with ICON
-                //  Stack(
-                //  children: [
-                /*   SizedBox(
+                Stack(
+                  children: [
+                    SizedBox(
                       width: 150,
                       height: 150,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: Image.asset(AppAssets.profileImg),
                       ),
-                    ),*/
-                Expanded(
-                    child: FutureBuilder(
-                  future: getdocid(),
-                  builder: (context, snapshot) {
-                    return ListView.builder(
-                        itemCount: docids.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(
-                              docids[index],
-                              style: TextStyle(fontSize: 60),
-                            ),
-                          );
-                        });
-                  },
-                ))
-              ],
-            ),
-            /* const SizedBox(height: 40),
+                    ),
+                    /*  Expanded(
+                        child: FutureBuilder(
+                      future: getdocid(),
+                      builder: (context, snapshot) {
+                        return ListView.builder(
+                            itemCount: docids.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Text(
+                                  docids[index],
+                                  style: TextStyle(fontSize: 60),
+                                ),
+                              );
+                            });
+                      },
+                    ))*/
+                  ],
+                ),
+                const SizedBox(height: 40),
                 Text('Name', style: Theme.of(context).textTheme.headline4),
                 const SizedBox(height: 60),
                 Text('Email', style: Theme.of(context).textTheme.bodyText2),
-                const SizedBox(height: 40),*/
+                const SizedBox(height: 40),
 
-            // -- Form Fields
-            /* Form(
+                // -- Form Fields
+                /* Form(
                   child: Column(
                     children: [
                       const SizedBox(height: 20),
@@ -99,11 +99,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     ],
                   ),
                 ),*/
-            // ],
+              ],
+            ),
           ),
         ),
       ),
-      //    ),
     );
   }
 }
