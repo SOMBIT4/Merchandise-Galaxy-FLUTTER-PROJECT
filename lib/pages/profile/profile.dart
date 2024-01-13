@@ -2,6 +2,7 @@
 
 //import 'dart:js';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -18,6 +19,21 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final user = FirebaseAuth.instance.currentUser!;
+  //docid
+  List<String> docids = [];
+//get doc id
+  Future getdocid() async {
+    await FirebaseFirestore.instance.collection('user').get().then(
+          (snapshot) => snapshot.docs.forEach(
+            (element) {
+              print(element.reference);
+              docids.add(element.reference.id);
+            },
+          ),
+        );
+  }
+
   get left => null;
 
   @override
@@ -69,11 +85,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
-              Text('Name', style: Theme.of(context).textTheme.headline4),
-              const SizedBox(height: 20),
-              Text('Email', style: Theme.of(context).textTheme.bodyText2),
-              const SizedBox(height: 40),
+
+              FutureBuilder<DocumentSnapshot>(
+                future: FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                    .get(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const LinearProgressIndicator();
+                  }
+
+                  if (snapshot.hasError) {
+                    return const Text("Something went wrong");
+                  }
+
+                  if (snapshot.data == null) {
+                    return const Text("No data");
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    Map<String, dynamic> data =
+                        snapshot.data!.data() as Map<String, dynamic>;
+                    //return Text("Full Name: ${data['name']}");
+                    return Container(
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 20),
+                          Text('${data['Name']}',
+                              style: Theme.of(context).textTheme.headline4),
+                          const SizedBox(height: 20),
+                          Text('${data['Email']}',
+                              style: Theme.of(context).textTheme.bodyText2),
+                          const SizedBox(height: 40),
+                        ],
+                      ),
+                    );
+                  }
+                  return const Text("loading");
+                },
+              ),
+              // const SizedBox(height: 20),
+              // Text('Name', style: Theme.of(context).textTheme.headline4),
+              // const SizedBox(height: 20),
+              // Text('Email', style: Theme.of(context).textTheme.bodyText2),
+              // const SizedBox(height: 40),
 
               /// -- BUTTON
               SizedBox(
