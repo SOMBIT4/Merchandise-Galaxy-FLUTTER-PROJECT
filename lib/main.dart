@@ -15,10 +15,12 @@ void main() async {
   Platform.isAndroid
       ? await Firebase.initializeApp(
           options: const FirebaseOptions(
-              apiKey: "AIzaSyBviwGHwBeUELJ-ucYG4HWuk9lEnddS7SI",
-              appId: "1:887917938524:android:c9e9e06d62919b8de6a399",
-              messagingSenderId: "887917938524",
-              projectId: "merchendise-galaxy"),
+            apiKey: "AIzaSyBviwGHwBeUELJ-ucYG4HWuk9lEnddS7SI",
+            appId: "1:887917938524:android:c9e9e06d62919b8de6a399",
+            messagingSenderId: "887917938524",
+            projectId: "merchendise-galaxy",
+            storageBucket: "merchendise-galaxy.appspot.com",
+          ),
         )
       : await Firebase.initializeApp();
   runApp(

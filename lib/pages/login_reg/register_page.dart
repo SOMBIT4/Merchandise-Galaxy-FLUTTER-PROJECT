@@ -223,11 +223,10 @@ class _registerPageState extends State<registerPage> {
   }
 
   Future adduserdetails(String name, String email, String password) async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'Name': name,
-      'Email': email,
-      'Password': password,
-    });
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .set({'Name': name, 'Email': email});
   }
 
   void passworddontmatchmessage() {

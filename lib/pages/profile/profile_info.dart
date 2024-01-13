@@ -61,12 +61,56 @@ class _ProfileInfoState extends State<ProfileInfo> {
                         child: Image.asset(AppAssets.profileImg),
                       ),
                     ),
+                    FutureBuilder<DocumentSnapshot>(
+                      future: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(FirebaseAuth.instance.currentUser?.uid)
+                          .get(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const LinearProgressIndicator();
+                        }
+
+                        if (snapshot.hasError) {
+                          return const Text("Something went wrong");
+                        }
+
+                        if (snapshot.data == null) {
+                          return const Text("No data");
+                        }
+
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          Map<String, dynamic> data =
+                              snapshot.data!.data() as Map<String, dynamic>;
+                          //return Text("Full Name: ${data['name']}");
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Name : ${data['Name']}",
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                'Email Account : ${data['Email']}',
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                            ],
+                          );
+                        }
+
+                        return const Text("loading");
+                      },
+                    )
                     /*  Expanded(
                         child: FutureBuilder(
                       future: getdocid(),
                       builder: (context, snapshot) {
                         return ListView.builder(
-                            itemCount: docids.length,
+                            itemCount: snapshot.length,
                             itemBuilder: (context, index) {
                               return ListTile(
                                 title: Text(
@@ -79,11 +123,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     ))*/
                   ],
                 ),
-                const SizedBox(height: 40),
+                /* const SizedBox(height: 40),
                 Text('Name', style: Theme.of(context).textTheme.headline4),
                 const SizedBox(height: 60),
                 Text('Email', style: Theme.of(context).textTheme.bodyText2),
-                const SizedBox(height: 40),
+                const SizedBox(height: 40),*/
 
                 // -- Form Fields
                 /* Form(
