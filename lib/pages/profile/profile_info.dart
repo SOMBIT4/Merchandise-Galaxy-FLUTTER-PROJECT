@@ -92,7 +92,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                               height: 30,
                             ),
                             Container(
-                              height: 80,
+                              height: 100,
                               width: 300,
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -138,7 +138,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                         ),
                                         Text(
                                           "${data['Name']}",
-                                          style: TextStyle(fontSize: 20),
+                                          style: TextStyle(fontSize: 18),
                                         ),
                                       ],
                                     ),
@@ -150,7 +150,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                               height: 25,
                             ),
                             Container(
-                              height: 80,
+                              height: 100,
                               width: 300,
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -180,6 +180,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                     ),
                                   ),
                                   Container(
+                                    height: 100,
                                     width: 220,
                                     padding: EdgeInsets.only(left: 20, top: 17),
                                     child: Column(
@@ -196,7 +197,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                         ),
                                         Text(
                                           "${data['Email']}",
-                                          style: TextStyle(fontSize: 18),
+                                          style: TextStyle(fontSize: 16),
                                         ),
                                       ],
                                     ),

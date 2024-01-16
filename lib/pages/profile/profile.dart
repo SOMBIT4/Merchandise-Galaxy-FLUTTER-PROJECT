@@ -40,6 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         leading: IconButton(
             onPressed: () => Navigator.pop(context),
             icon: const Icon(LineAwesomeIcons.angle_left)),
@@ -67,22 +68,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Image.asset(AppAssets.profileImg),
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                      width: 35,
-                      height: 35,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: AppColor.whiteColor),
-                      child: const Icon(
-                        LineAwesomeIcons.alternate_pencil,
-                        color: Colors.black,
-                        size: 20,
-                      ),
-                    ),
-                  ),
+                  // Positioned(
+                  //   bottom: 0,
+                  //   right: 0,
+                  //   child: Container(
+                  //     width: 35,
+                  //     height: 35,
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(100),
+                  //         color: AppColor.whiteColor),
+                  //     child: const Icon(
+                  //       LineAwesomeIcons.alternate_pencil,
+                  //       color: Colors.black,
+                  //       size: 20,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
 
@@ -159,7 +160,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       backgroundColor: AppColor.whiteColor,
                       side: BorderSide.none,
                       shape: const StadiumBorder()),
-                  child: const Text('Profile Imformation',
+                  child: const Text('Profile Information',
                       style: TextStyle(color: Colors.black)),
                 ),
               ),
