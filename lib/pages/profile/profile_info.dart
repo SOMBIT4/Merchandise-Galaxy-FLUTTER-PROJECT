@@ -205,20 +205,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                 ],
                               ),
                             )
-
-                            // itemProfile('User_Name', '${data['Name']}',
-                            //  CupertinoIcons.person)
-                            // Text(
-                            //   "User_Name : -   ${data['Name']}",
-                            //   style: const TextStyle(fontSize: 20),
-                            // ),
-                            // const SizedBox(
-                            //   height: 30,
-                            // ),
-                            // Text(
-                            //   ' ${data['Email']}',
-                            //   style: const TextStyle(fontSize: 28),
-                            // ),
                           ],
                         ),
                       );
