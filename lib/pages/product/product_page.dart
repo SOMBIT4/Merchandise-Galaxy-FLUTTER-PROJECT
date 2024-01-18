@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:merchendise_galaxy/pages/chat/Chat.dart';
 import 'package:merchendise_galaxy/pages/product/bottom_navbar.dart';
 import 'package:merchendise_galaxy/pages/product/my_cart.dart';
 import 'package:merchendise_galaxy/pages/profile/profile.dart';
@@ -30,7 +31,14 @@ class _HomePageState extends State<ProductPage> {
               const ProfileScreen()), // Replace BlankPage with the actual blank page you want to navigate to
     );
   }
-
+void _navigateToHomeScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+               HomeScreen()), // Replace BlankPage with the actual blank page you want to navigate to
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,6 +152,24 @@ class _HomePageState extends State<ProductPage> {
                     const SizedBox(
                       width: 15,
                     ),
+
+                     GestureDetector(
+                      onTap: _navigateToHomeScreen,
+                      child: Container(
+                        height: 60,
+                        width: 60,
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColor.buttonColor,
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: const Icon(
+                          Icons.chat,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+
                   ],
                 ),
                 const SizedBox(
