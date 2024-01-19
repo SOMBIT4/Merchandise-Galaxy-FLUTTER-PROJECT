@@ -16,6 +16,7 @@ class ProductPage extends StatefulWidget {
 }
 
 class _HomePageState extends State<ProductPage> {
+  
   void _navigateToMyCart() {
     Navigator.push(
       context,
