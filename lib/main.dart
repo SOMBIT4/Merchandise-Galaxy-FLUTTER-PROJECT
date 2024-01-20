@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/pages/product/bottom_navbar.dart';
+import 'package:merchendise_galaxy/pages/product/payment_page.dart';
 import 'package:merchendise_galaxy/pages/product/product_page.dart';
 import 'package:merchendise_galaxy/pages/profile/profile_info.dart';
 //import 'package:merchendise_galaxy/pages/profile/profile_update.dart';
