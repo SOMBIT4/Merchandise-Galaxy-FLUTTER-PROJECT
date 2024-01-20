@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -17,119 +18,84 @@ class UpdateProfileScreen extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<UpdateProfileScreen> {
-  // text fiedl controller
-  final TextEditingController _numberController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final CollectionReference users =
+      FirebaseFirestore.instance.collection('users');
 
-  final CollectionReference _items =
-      FirebaseFirestore.instance.collection("Upload_Items");
-  // collection name must be same as firebase collection name
+  late User _user;
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
 
   String imageUrl = '';
 
   Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
-    await showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (BuildContext ctx) {
-          return Padding(
-            padding: EdgeInsets.only(
-                top: 20,
-                right: 20,
-                left: 20,
-                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Center(
-                  child: Text("Choose"),
-                ),
-                // TextField(
-                //   controller: _nameController,
-                //   decoration: const InputDecoration(
-                //       labelText: 'Name', hintText: 'eg Elon'),
-                // ),
-                // TextField(
-                //   controller: _numberController,
-                //   decoration: const InputDecoration(
-                //       labelText: 'Number', hintText: 'eg 10'),
-                // ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Center(
-                  child: IconButton(
-                    onPressed: () async {
-                      // add the package image_picker
-                      final file = await ImagePicker()
-                          .pickImage(source: ImageSource.gallery);
-                      if (file == null) return;
+    // add the package image_picker
+    final file = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (file == null) return;
 
-                      String fileName =
-                          DateTime.now().microsecondsSinceEpoch.toString();
+    String fileName = DateTime.now().microsecondsSinceEpoch.toString();
 
-                      // Get the reference to storage root
-                      // We create the image folder first and insider folder we upload the image
-                      Reference referenceRoot = FirebaseStorage.instance.ref();
-                      Reference referenceDireImages =
-                          referenceRoot.child('images');
+    // Get the reference to storage root
+    // We create the image folder first and insider folder we upload the image
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDireImages = referenceRoot.child('images');
 
-                      // we have creata reference for the image to be stored
-                      Reference referenceImageaToUpload =
-                          referenceDireImages.child(fileName);
+    // we have creata reference for the image to be stored
+    Reference referenceImageaToUpload = referenceDireImages.child(fileName);
 
-                      // For errors handled and/or success
-                      try {
-                        await referenceImageaToUpload.putFile(File(file.path));
+    // For errors handled and/or success
+    try {
+      await referenceImageaToUpload.putFile(File(file.path));
 
-                        // We have successfully upload the image now
-                        // make this upload image link in firebase database
+      // We have successfully upload the image now
+      // make this upload image link in firebase database
 
-                        imageUrl =
-                            await referenceImageaToUpload.getDownloadURL();
-                      } catch (error) {
-                        //some error
-                      }
-                    },
-                    icon: const Icon(Icons.camera_alt),
-                  ),
-                ),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      if (imageUrl.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Please select and upload image"),
-                          ),
-                        );
-                        return;
-                      }
-                      final int? number = int.tryParse(_numberController.text);
-                      if (number != null) {
-                        await _items.add({
-                          // Add items in you firebase firestore
+      imageUrl = await referenceImageaToUpload.getDownloadURL();
+      print("url is ---------------------------------------");
+      print(imageUrl);
+    } catch (e) {
+      print(e);
+    }
+  }
 
-                          "image": imageUrl,
-                        });
-                        // _nameController.text = '';
-                        // _numberController.text = '';
-                        Navigator.of(context).pop();
-                      }
-                    },
-                    child: const Text('Create'),
-                  ),
-                )
-              ],
-            ),
-          );
-        });
+  Future<void> _updateUserProfile2() async {
+    try {
+      users.doc(_user.uid).update(
+        {
+          'Name': _usernameController.text,
+          'Email': _emailController.text,
+          'ProfileImage': imageUrl,
+        },
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('User profile updated successfully!'),
+        ),
+      );
+    } catch (e) {
+      print('Error updating user profile: $e');
+    }
+  }
+
+  Future<void> _getUserData() async {
+    _user = _auth.currentUser!;
+    DocumentSnapshot userSnapshot = await users.doc(_user.uid).get();
+
+    setState(() {
+      _usernameController.text = userSnapshot['Name'];
+      _emailController.text = userSnapshot['Email'];
+      imageUrl = userSnapshot['ProfileImage'];
+    });
   }
 
   late Stream<QuerySnapshot> _stream;
+
   @override
   void initState() {
     super.initState();
+    // _getUserData();
+
     _stream = FirebaseFirestore.instance.collection('users').snapshots();
   }
 
@@ -152,12 +118,6 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
             }
             // Now , Cheeck if datea arrived?
             if (snapshot.hasData) {
-              // QuerySnapshot querySnapshot = snapshot.data;
-              // List<QueryDocumentSnapshot> document = querySnapshot.docs;
-
-              // We need to Convert your documnets to Maps to display
-              //    List<Map> items = document.map((e) => e.data() as Map).toList();
-
               return SingleChildScrollView(
                 child: Container(
                   padding: const EdgeInsets.all(30),
@@ -213,7 +173,7 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
                               ConnectionState.done) {
                             Map<String, dynamic> data =
                                 snapshot.data!.data() as Map<String, dynamic>;
-                            //return Text("Full Name: ${data['name']}");
+
                             return Container(
                               width: 300,
                               child: Column(
@@ -402,7 +362,7 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
                                       SizedBox(
                                         width: 150,
                                         child: ElevatedButton(
-                                          onPressed: () {},
+                                          onPressed: _updateUserProfile2,
                                           style: ElevatedButton.styleFrom(
                                               backgroundColor: Color.fromARGB(
                                                       255, 35, 255, 46)
@@ -415,7 +375,7 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
                                           child: Text('Done',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
-                                                      255, 14, 95, 18))),
+                                                      255, 0, 0, 0))),
                                         ),
                                       ),
                                     ],
@@ -456,12 +416,6 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
               child: CircularProgressIndicator(),
             );
           }),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     _create();
-      //   },
-      //   child: const Icon(Icons.add),
-      // ),
     );
   }
 }
