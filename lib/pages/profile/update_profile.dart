@@ -103,6 +103,7 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         title: Container(
           padding: EdgeInsets.only(left: 60),
           child: const Text("Edit Profile"),

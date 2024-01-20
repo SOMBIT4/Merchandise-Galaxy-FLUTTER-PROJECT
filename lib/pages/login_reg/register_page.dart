@@ -202,6 +202,7 @@ class _registerPageState extends State<registerPage> {
 
         if (user != null) {
           //add user details
+          user.updateDisplayName(namecontroller.text);
           adduserdetails(namecontroller.text, usernamecontroller.text,
               passwordcontroller.text);
           print("Password  match");

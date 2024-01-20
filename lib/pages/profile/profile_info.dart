@@ -180,6 +180,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                     ),
                                   ),
                                   Container(
+                                    height: 100,
                                     width: 220,
                                     padding: EdgeInsets.only(left: 20, top: 17),
                                     child: Column(
