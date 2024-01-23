@@ -33,41 +33,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return "";
   }
 
-  String? _currentusername;
   void inputData() {
     final User? user = _auth.currentUser;
     final uname = user!.uid;
     print(uname);
     // here you write the codes to input the data into firestore
-  }
-
-  Future<void> _getcurrentname() async {
-    FutureBuilder<DocumentSnapshot>(
-      future: FirebaseFirestore.instance
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser?.uid)
-          .get(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LinearProgressIndicator();
-        }
-
-        if (snapshot.hasError) {
-          return const Text("Something went wrong");
-        }
-
-        if (snapshot.data == null) {
-          return const Text("No data");
-        }
-
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data =
-              snapshot.data!.data() as Map<String, dynamic>;
-          _currentusername = '${data['name']}';
-        }
-        return const Text("loading");
-      },
-    );
   }
 
   void onSearch() async {

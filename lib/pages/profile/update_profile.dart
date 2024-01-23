@@ -94,7 +94,7 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
   @override
   void initState() {
     super.initState();
-    // _getUserData();
+    _getUserData();
 
     _stream = FirebaseFirestore.instance.collection('users').snapshots();
   }

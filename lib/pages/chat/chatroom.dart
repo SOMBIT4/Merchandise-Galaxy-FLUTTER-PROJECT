@@ -75,7 +75,9 @@ class ChatRoom extends StatelessWidget {
                   return ListView.builder(
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
-                      return Text(snapshot.data!.docs[index]['message']);
+                      Map<String, dynamic> map = snapshot.data!.docs[index]
+                          .data() as Map<String, dynamic>;
+                      return messages(size, map);
                     },
                   );
                 } else {
@@ -97,6 +99,7 @@ class ChatRoom extends StatelessWidget {
                     child: TextField(
                       controller: _message,
                       decoration: InputDecoration(
+                        hintText: "Send message",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -112,6 +115,31 @@ class ChatRoom extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget messages(Size size, Map<String, dynamic> map) {
+    return Container(
+      width: size.width,
+      alignment: map['sendby'] == _auth.currentUser!.displayName
+          ? Alignment.centerRight
+          : Alignment.centerLeft,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.blue,
+        ),
+        child: Text(
+          map['message'],
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
