@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/pages/chat/Chat.dart';
 import 'package:merchendise_galaxy/pages/product/bottom_navbar.dart';
 import 'package:merchendise_galaxy/pages/product/my_cart.dart';
+import 'package:merchendise_galaxy/pages/product/product_details.dart';
 import 'package:merchendise_galaxy/pages/profile/profile.dart';
 import 'package:merchendise_galaxy/re_useable/showProduct.dart';
 import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';
@@ -31,14 +32,16 @@ class _HomePageState extends State<ProductPage> {
               const ProfileScreen()), // Replace BlankPage with the actual blank page you want to navigate to
     );
   }
-void _navigateToHomeScreen() {
+
+  void _navigateToHomeScreen() {
     Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) =>
-               HomeScreen()), // Replace BlankPage with the actual blank page you want to navigate to
+              HomeScreen()), // Replace BlankPage with the actual blank page you want to navigate to
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -153,7 +156,7 @@ void _navigateToHomeScreen() {
                       width: 15,
                     ),
 
-                     GestureDetector(
+                    GestureDetector(
                       onTap: _navigateToHomeScreen,
                       child: Container(
                         height: 60,
@@ -169,7 +172,6 @@ void _navigateToHomeScreen() {
                         ),
                       ),
                     ),
-
                   ],
                 ),
                 const SizedBox(
@@ -188,18 +190,27 @@ void _navigateToHomeScreen() {
                 SizedBox(
                   height: 262,
                   child: ListView.separated(
-                    itemCount: DummyFoodProducts.exploreList.length,
+                    itemCount: DummyProductList.exploreList.length,
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     separatorBuilder: (context, index) => const SizedBox(
                       width: 16,
                     ),
                     itemBuilder: (context, index) {
-                      var foodProduct = DummyFoodProducts.exploreList[index];
+                      var foodProduct = DummyProductList.exploreList[index];
                       return ProductListTile(
                         productName: foodProduct.productName,
                         price: foodProduct.price,
                         image: foodProduct.productImage,
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ProductDetails(
+                                productModel: foodProduct,
+                              ),
+                            ),
+                          );
+                        },
                       );
                     },
                   ),
@@ -220,18 +231,27 @@ void _navigateToHomeScreen() {
                 SizedBox(
                   height: 262,
                   child: ListView.separated(
-                    itemCount: DummyPoloProducts.exploreList.length,
+                    itemCount: DummyProductList.poloProduct.length,
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     separatorBuilder: (context, index) => const SizedBox(
                       width: 16,
                     ),
                     itemBuilder: (context, index) {
-                      var poloProduct = DummyPoloProducts.exploreList[index];
+                      var poloProduct = DummyProductList.poloProduct[index];
                       return ProductListTile(
                         image: poloProduct.productImage,
                         price: poloProduct.price,
                         productName: poloProduct.productName,
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ProductDetails(
+                                productModel: poloProduct,
+                              ),
+                            ),
+                          );
+                        },
                       );
                     },
                   ),
@@ -252,18 +272,27 @@ void _navigateToHomeScreen() {
                 SizedBox(
                   height: 262,
                   child: ListView.separated(
-                    itemCount: DummyTshirtProducts.exploreList.length,
+                    itemCount: DummyProductList.tProduct.length,
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     separatorBuilder: (context, index) => const SizedBox(
                       width: 16,
                     ),
                     itemBuilder: (context, index) {
-                      var tProduct = DummyTshirtProducts.exploreList[index];
+                      var tProduct = DummyProductList.tProduct[index];
                       return ProductListTile(
                         price: tProduct.price,
                         productName: tProduct.productName,
                         image: tProduct.productImage,
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ProductDetails(
+                                productModel: tProduct,
+                              ),
+                            ),
+                          );
+                        },
                       );
                     },
                   ),

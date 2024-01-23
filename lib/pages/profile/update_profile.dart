@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -58,7 +57,7 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
     }
   }
 
-  Future<void> _updateUserProfile2() async {
+  Future<void> _updateUserProfile() async {
     try {
       users.doc(_user.uid).update(
         {
@@ -82,11 +81,13 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
     _user = _auth.currentUser!;
     DocumentSnapshot userSnapshot = await users.doc(_user.uid).get();
 
-    setState(() {
-      _usernameController.text = userSnapshot['Name'];
-      _emailController.text = userSnapshot['Email'];
-      imageUrl = userSnapshot['ProfileImage'];
-    });
+    setState(
+      () {
+        _usernameController.text = userSnapshot['Name'];
+        _emailController.text = userSnapshot['Email'];
+        imageUrl = userSnapshot['ProfileImage'];
+      },
+    );
   }
 
   late Stream<QuerySnapshot> _stream;
@@ -94,7 +95,7 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
   @override
   void initState() {
     super.initState();
-    // _getUserData();
+    _getUserData();
 
     _stream = FirebaseFirestore.instance.collection('users').snapshots();
   }
@@ -363,7 +364,7 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
                                       SizedBox(
                                         width: 150,
                                         child: ElevatedButton(
-                                          onPressed: _updateUserProfile2,
+                                          onPressed: _updateUserProfile,
                                           style: ElevatedButton.styleFrom(
                                               backgroundColor: Color.fromARGB(
                                                       255, 35, 255, 46)
