@@ -15,7 +15,6 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isLoading = false;
   final TextEditingController _search = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   String chatroomId(String user1, String user2) {
     if (user1 != null && user2 != null) {

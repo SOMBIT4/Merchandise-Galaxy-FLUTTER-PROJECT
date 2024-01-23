@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
+import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -26,31 +26,37 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
 
+  String? _profileImageUrl;
   String imageUrl = '';
+  Uint8List? _image_path;
 
   Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
-    // add the package image_picker
     final file = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (file != null) {
+      File imageFile = File(file.path);
+    }
+
     if (file == null) return;
 
     String fileName = DateTime.now().microsecondsSinceEpoch.toString();
 
-    // Get the reference to storage root
-    // We create the image folder first and insider folder we upload the image
+    // reference to storage root
+
     Reference referenceRoot = FirebaseStorage.instance.ref();
     Reference referenceDireImages = referenceRoot.child('images');
 
-    // we have creata reference for the image to be stored
+    // reference for the image to be stored
     Reference referenceImageaToUpload = referenceDireImages.child(fileName);
 
-    // For errors handled and/or success
     try {
       await referenceImageaToUpload.putFile(File(file.path));
 
-      // We have successfully upload the image now
-      // make this upload image link in firebase database
-
       imageUrl = await referenceImageaToUpload.getDownloadURL();
+
+      setState(() {
+        _profileImageUrl = imageUrl;
+      });
+
       print("url is ---------------------------------------");
       print(imageUrl);
     } catch (e) {
@@ -58,7 +64,7 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
     }
   }
 
-  Future<void> _updateUserProfile2() async {
+  Future<void> _updateUserProfile() async {
     try {
       users.doc(_user.uid).update(
         {
@@ -82,11 +88,13 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
     _user = _auth.currentUser!;
     DocumentSnapshot userSnapshot = await users.doc(_user.uid).get();
 
-    setState(() {
-      _usernameController.text = userSnapshot['Name'];
-      _emailController.text = userSnapshot['Email'];
-      imageUrl = userSnapshot['ProfileImage'];
-    });
+    setState(
+      () {
+        _usernameController.text = userSnapshot['Name'];
+        _emailController.text = userSnapshot['Email'];
+        imageUrl = userSnapshot['ProfileImage'];
+      },
+    );
   }
 
   late Stream<QuerySnapshot> _stream;
@@ -119,6 +127,13 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
             }
             // Now , Cheeck if datea arrived?
             if (snapshot.hasData) {
+              // QuerySnapshot querySnapshot = snapshot.data;
+              // List<QueryDocumentSnapshot> document = querySnapshot.docs;
+
+              // We need to Convert your documnets to Maps to display
+              // List<Map> items = document.map((e) => e.data() as Map).toList();
+              //Map thisItems = items[index];
+
               return SingleChildScrollView(
                 child: Container(
                   padding: const EdgeInsets.all(30),
@@ -127,13 +142,21 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
                       // -- IMAGE with ICON
                       Stack(
                         children: [
-                          SizedBox(
-                            width: 120,
-                            height: 120,
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: Image.asset(AppAssets.profileImg)),
-                          ),
+                          _profileImageUrl != null
+                              ? SizedBox(
+                                  width: 120,
+                                  height: 120,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: Image.network(_profileImageUrl!)),
+                                )
+                              : SizedBox(
+                                  width: 120,
+                                  height: 120,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: Image.asset(AppAssets.profileImg)),
+                                ),
                           Positioned(
                             bottom: 0,
                             right: 0,
@@ -363,7 +386,7 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
                                       SizedBox(
                                         width: 150,
                                         child: ElevatedButton(
-                                          onPressed: _updateUserProfile2,
+                                          onPressed: _updateUserProfile,
                                           style: ElevatedButton.styleFrom(
                                               backgroundColor: Color.fromARGB(
                                                       255, 35, 255, 46)

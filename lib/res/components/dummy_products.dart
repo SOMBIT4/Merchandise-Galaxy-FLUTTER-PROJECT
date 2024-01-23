@@ -1,7 +1,7 @@
 import 'package:merchendise_galaxy/pages/product/product_model.dart';
 import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';
 
-class DummyFoodProducts {
+class DummyProductList {
   static List<ProductModel> exploreList = <ProductModel>[
     ProductModel(
       productName: "Pizza",
@@ -29,10 +29,8 @@ class DummyFoodProducts {
       price: '200',
     ),
   ];
-}
 
-class DummyPoloProducts {
-  static List<ProductModel> exploreList = <ProductModel>[
+  static List<ProductModel> poloProduct = <ProductModel>[
     ProductModel(
       productName: "Black Polo",
       productImage: AppAssets.poloBlack,
@@ -54,10 +52,8 @@ class DummyPoloProducts {
       price: '200',
     ),
   ];
-}
 
-class DummyTshirtProducts {
-  static List<ProductModel> exploreList = <ProductModel>[
+  static List<ProductModel> tProduct = <ProductModel>[
     ProductModel(
       productName: "Black T-Shirt",
       productImage: AppAssets.tBlack,
