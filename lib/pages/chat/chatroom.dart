@@ -56,8 +56,59 @@ class ChatRoom extends StatelessWidget {
     }
 
     return Scaffold(
+      backgroundColor: Colors.blueGrey.shade200,
       appBar: AppBar(
-        title: Text(userMap['Name']),
+        backgroundColor: Colors.blue,
+        title: Column(
+          children: [
+            Text(userMap['Name']),
+            Text(
+              userMap['status'],
+              style: TextStyle(fontSize: 14),
+            ),
+          ],
+        ),
+        ////Text(userMap['Name']), //StreamBuilder<DocumentSnapshot>(
+        //   stream: _firestore
+        //       .collection("users")
+        //       .doc(userMap[FirebaseAuth.instance.currentUser?.uid])
+        //       .snapshots(),
+        //   builder: (context, snapshot) {
+        //     if (snapshot.hasData && snapshot.data!.exists) {
+        //       Map<String, dynamic>? userData =
+        //           snapshot.data!.data() as Map<String, dynamic>?;
+
+        //       if (userData != null && userData.containsKey('status')) {
+        //         return Container(
+        //           child: Column(
+        //             children: [
+        //               Text(userMap['Name']),
+        //               Text(
+        //                 userData['status'],
+        //                 style: TextStyle(fontSize: 14),
+        //               ),
+        //             ],
+        //           ),
+        //         );
+        //       } else {
+        //         // Handle the case where the 'status' field is not present in the document
+        //         return Container(
+        //           child: Column(
+        //             children: [
+        //               Text(userMap['Name']),
+        //               Text(
+        //                 "Status not available",
+        //                 style: TextStyle(fontSize: 14),
+        //               ),
+        //             ],
+        //           ),
+        //         );
+        //       }
+        //     } else {
+        //       return Container();
+        //     }
+        //   },
+        // ),
       ),
       body: Column(
         children: [
@@ -99,6 +150,8 @@ class ChatRoom extends StatelessWidget {
                     child: TextField(
                       controller: _message,
                       decoration: InputDecoration(
+                        fillColor: Colors.grey.shade300,
+                        filled: true,
                         hintText: "Send message",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),

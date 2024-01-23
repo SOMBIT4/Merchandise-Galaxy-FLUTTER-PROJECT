@@ -10,11 +10,36 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   Map<String, dynamic>? userMap;
   bool isLoading = false;
   final TextEditingController _search = TextEditingController();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    setStatus("Online");
+  }
+
+  void setStatus(String status) async {
+    await _firestore.collection('users').doc(_auth.currentUser?.uid).update({
+      "status": status,
+    });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // online
+      setStatus("Online");
+    } else {
+      // offline
+      setStatus("Offline");
+    }
+  }
 
   String chatroomId(String user1, String user2) {
     if (user1 != null && user2 != null) {
@@ -71,7 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: Colors.blueGrey.shade200,
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         title: Text("Home Screen"),
       ),
       body: isLoading
@@ -97,6 +124,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: TextField(
                       controller: _search,
                       decoration: InputDecoration(
+                        fillColor: Colors.grey.shade300,
+                        filled: true,
                         hintText: "Search",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -116,34 +145,41 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: size.height / 50,
                 ),
                 if (userMap != null)
-                  ListTile(
-                    onTap: () {
-                      inputData();
-                      String roomId = chatroomId(
-                          _auth.currentUser?.displayName ?? '',
-                          userMap!['Name'] ?? '');
-                      print("room id is ----");
-                      print(roomId);
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => ChatRoom(
-                            chatroomId: roomId,
-                            userMap: userMap!,
-                          ),
-                        ),
-                      );
-                    },
-                    leading: Icon(Icons.account_box, color: Colors.black),
-                    title: Text(
-                      userMap!['Name'] ?? '',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 17,
-                        fontWeight: FontWeight.w500,
+                  Card(
+                    color: Colors.grey.shade300,
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(width: 2),
+                        borderRadius: BorderRadius.circular(20),
                       ),
+                      onTap: () {
+                        inputData();
+                        String roomId = chatroomId(
+                            _auth.currentUser?.displayName ?? '',
+                            userMap!['Name'] ?? '');
+                        print("room id is ----");
+                        print(roomId);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => ChatRoom(
+                              chatroomId: roomId,
+                              userMap: userMap!,
+                            ),
+                          ),
+                        );
+                      },
+                      leading: Icon(Icons.account_box, color: Colors.black),
+                      title: Text(
+                        userMap!['Name'] ?? '',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      subtitle: Text(userMap!['Email'] ?? ''),
+                      trailing: Icon(Icons.chat, color: Colors.black),
                     ),
-                    subtitle: Text(userMap!['Email'] ?? ''),
-                    trailing: Icon(Icons.chat, color: Colors.black),
                   ),
               ],
             ),

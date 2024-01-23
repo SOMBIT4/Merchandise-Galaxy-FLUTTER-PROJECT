@@ -227,7 +227,11 @@ class _registerPageState extends State<registerPage> {
     await FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser?.uid)
-        .set({'Name': name, 'Email': email});
+        .set({
+      'Name': name,
+      'Email': email,
+      'status': "Unavailable",
+    });
   }
 
   void passworddontmatchmessage() {
