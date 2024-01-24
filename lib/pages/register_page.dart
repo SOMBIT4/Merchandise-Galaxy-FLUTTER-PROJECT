@@ -1,38 +1,41 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:merchendise_galaxy/components/image_path.dart';
-import 'package:merchendise_galaxy/components/my_button.dart';
+import 'package:merchendise_galaxy/components/my_button2.dart';
 import 'package:merchendise_galaxy/components/my_texfield.dart';
 import 'package:merchendise_galaxy/components/my_textfield1.dart';
-import 'package:merchendise_galaxy/components/register_button.dart';
-import 'package:merchendise_galaxy/pages/forget_pass.dart';
+import 'package:merchendise_galaxy/components/my_textfield3.dart';
+import 'package:merchendise_galaxy/components/my_textfield4.dart';
 import 'package:merchendise_galaxy/user_auth/firebase_auth_services.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+class registerPage extends StatefulWidget {
+  registerPage({
+    super.key,
+  });
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<registerPage> createState() => _registerPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _registerPageState extends State<registerPage> {
   final Firebaseauthservice _auth = Firebaseauthservice();
 //text editing controller
-
+  final namecontroller = TextEditingController();
   final usernamecontroller = TextEditingController();
 
   final passwordcontroller = TextEditingController();
+  final confirmpasswordcontroller = TextEditingController();
 
   @override
   void dispose() {
+    namecontroller.dispose();
     usernamecontroller.dispose();
     passwordcontroller.dispose();
-
+    confirmpasswordcontroller.dispose();
     super.dispose();
   }
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey.shade200,
@@ -45,19 +48,31 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 10),
 
                 //logo
-                Image.asset('lib/images/logo1.png', height: 180),
+                Image.asset(
+                  'lib/images/logo1.png',
+                  height: 105,
+                  // width: 100,
+                ),
 
-                const SizedBox(height: 30),
+                const SizedBox(height: 10),
 
                 const Text(
-                  'Welcome back you\'ve been missed!',
+                  'Let\'s create an account',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 22.5,
                   ),
                 ),
 
-                const SizedBox(height: 25),
+                const SizedBox(height: 20),
+                //name field
+                Mytextfield3(
+                  controller: namecontroller,
+                  hintText: 'Name',
+                  obscureText: false,
+                ),
+
+                const SizedBox(height: 20),
                 //username field
                 Mytextfield(
                   controller: usernamecontroller,
@@ -72,41 +87,17 @@ class _LoginPageState extends State<LoginPage> {
                   hintText: 'Password',
                 ),
 
-                //forgot password
-                const SizedBox(height: 10),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return Forgetpasswordpage();
-                              },
-                            ),
-                          );
-                        },
-                        child: Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                const SizedBox(height: 20),
+                //confirm password text field
+                Mytextfield4(
+                  controller: confirmpasswordcontroller,
+                  hintText: 'Confirm Password',
                 ),
 
-                const SizedBox(height: 15),
-                //sign in button
-                Mybutton(
-                  onTap: signin,
+                const SizedBox(height: 20),
+                //sign up button
+                Mybutton1(
+                  onTap: signup,
                 ),
 
                 const SizedBox(height: 20),
@@ -141,17 +132,15 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
                 //google + apple sign in button
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //google
-                    Imagepath(
-                        onTap: () => _signinGoogle(),
-                        image: 'lib/images/google.png'),
+                    /* Imagepath(onTap: () {}, image: 'lib/images/google.png'),
 
-                    /* SizedBox(width: 25),
+                    SizedBox(width: 25),
                     //fb
                     Imagepath(onTap: () {}, image: 'lib/images/facebook.png'),
 
@@ -166,15 +155,23 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Don't have an account?",
+                      "Already have an account?",
                       style: TextStyle(
                         fontSize: 16,
                       ),
                     ),
                     const SizedBox(width: 4),
-                    register(
-                        onTap: () =>
-                            Navigator.pushNamed(context, '/register_page')),
+                    GestureDetector(
+                      onTap: () => Navigator.pushNamedAndRemoveUntil(
+                          context, '/login_page', (route) => false),
+                      child: const Text(
+                        'Login now',
+                        style: TextStyle(
+                            color: Colors.deepPurple,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
                   ],
                 )
               ],
@@ -185,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void signin() async {
+  void signup() async {
     String email = usernamecontroller.text;
     String password = passwordcontroller.text;
 //show loading circle
@@ -196,26 +193,52 @@ class _LoginPageState extends State<LoginPage> {
             child: CircularProgressIndicator(),
           );
         });
-//sign in
-    User? user = await _auth.signinwithemailandpassword(email, password);
-    if (user != null) {
-      print("user succesfully logined");
-      Navigator.pushReplacementNamed(context, '/product_page');
+    //sign up
+    if (namecontroller.text.isNotEmpty &&
+        usernamecontroller.text.isNotEmpty &&
+        passwordcontroller.text.isNotEmpty &&
+        confirmpasswordcontroller.text.isNotEmpty) {
+      if (passwordcontroller.text == confirmpasswordcontroller.text) {
+        User? user = await _auth.signupwithemailandpassword(email, password);
+
+        if (user != null) {
+          //add user details
+          adduserdetails(namecontroller.text, usernamecontroller.text,
+              passwordcontroller.text);
+          print("Password  match");
+          Navigator.pushNamed(context, '/product_page');
+        } else {
+          Navigator.pop(context);
+          alreayregistermessage();
+        }
+      } else {
+        print("Password don't  match");
+        Navigator.pop(context);
+        passworddontmatchmessage();
+      }
     } else {
       print("Some error occured");
       Navigator.pop(context);
-      wrongemailorpasswordmessage();
+      fillfieldmessage();
     }
   }
 
-  void wrongemailorpasswordmessage() {
+  Future adduserdetails(String name, String email, String password) async {
+    await FirebaseFirestore.instance.collection('users').add({
+      'Name': name,
+      'Email': email,
+      'Password': password,
+    });
+  }
+
+  void passworddontmatchmessage() {
     showDialog(
       context: context,
       builder: (context) {
         return const AlertDialog(
           backgroundColor: Colors.deepPurple,
           title: Text(
-            'Incorrect Email/Password or Network Issue',
+            'Password Don\'t  Match',
             style: TextStyle(color: Colors.white),
           ),
         );
@@ -223,32 +246,33 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _signinGoogle() async {
-    final GoogleSignIn _googlesignin = GoogleSignIn();
-    //show loading circle
+  void fillfieldmessage() {
     showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
-    try {
-      final GoogleSignInAccount? googleSignInAccount =
-          await _googlesignin.signIn();
-      if (googleSignInAccount != null) {
-        final GoogleSignInAuthentication googleSignInAuthentication =
-            await googleSignInAccount.authentication;
-        final AuthCredential credential = GoogleAuthProvider.credential(
-          idToken: googleSignInAuthentication.idToken,
-          accessToken: googleSignInAuthentication.accessToken,
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          backgroundColor: Colors.deepPurple,
+          title: Text(
+            'You Must Fill Up All The Fields',
+            style: TextStyle(color: Colors.white),
+          ),
         );
-        await FirebaseAuth.instance.signInWithCredential(credential);
-        Navigator.pushNamed(context, '/product_page');
-      }
-    } catch (e) {
-      Navigator.pop(context);
-      print(e);
-    }
+      },
+    );
+  }
+
+  void alreayregistermessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          backgroundColor: Colors.deepPurple,
+          title: Text(
+            'Ethier this Email is already registered or the password is too short. Please!Enter a 6 digit password or Network issue',
+            style: TextStyle(color: Colors.white),
+          ),
+        );
+      },
+    );
   }
 }

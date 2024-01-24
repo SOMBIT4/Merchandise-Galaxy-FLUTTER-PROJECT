@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class Mytextfield1 extends StatefulWidget {
+class Mytextfield4 extends StatefulWidget {
   final controller;
   final String hintText;
 
-  const Mytextfield1({
+  const Mytextfield4({
     super.key,
     required this.controller,
     required this.hintText,
   });
 
   @override
-  State<Mytextfield1> createState() => _Mytextfield1State();
+  State<Mytextfield4> createState() => _Mytextfield1State();
 }
 
-class _Mytextfield1State extends State<Mytextfield1> {
+class _Mytextfield1State extends State<Mytextfield4> {
   bool _obsecuretext = true;
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class _Mytextfield1State extends State<Mytextfield1> {
             borderSide: const BorderSide(color: Colors.black),
             borderRadius: BorderRadius.circular(12),
           ),
-          label: Text('Password'),
+          label: Text('Confirm Password'),
           labelStyle: TextStyle(
             color: Colors.black,
           ),
