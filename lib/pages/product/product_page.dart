@@ -199,9 +199,7 @@ class _HomePageState extends State<ProductPage> {
                     itemBuilder: (context, index) {
                       var foodProduct = DummyProductList.exploreList[index];
                       return ProductListTile(
-                        productName: foodProduct.productName,
-                        price: foodProduct.price,
-                        image: foodProduct.productImage,
+                        productModel: foodProduct,
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
@@ -240,9 +238,7 @@ class _HomePageState extends State<ProductPage> {
                     itemBuilder: (context, index) {
                       var poloProduct = DummyProductList.poloProduct[index];
                       return ProductListTile(
-                        image: poloProduct.productImage,
-                        price: poloProduct.price,
-                        productName: poloProduct.productName,
+                        productModel: poloProduct,
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
@@ -281,9 +277,7 @@ class _HomePageState extends State<ProductPage> {
                     itemBuilder: (context, index) {
                       var tProduct = DummyProductList.tProduct[index];
                       return ProductListTile(
-                        price: tProduct.price,
-                        productName: tProduct.productName,
-                        image: tProduct.productImage,
+                        productModel: tProduct,
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(

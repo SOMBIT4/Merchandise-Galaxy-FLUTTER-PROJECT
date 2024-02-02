@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:merchendise_galaxy/pages/cart/cart_view.dart';
 import 'package:merchendise_galaxy/pages/product/product_model.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
 
@@ -121,8 +122,4 @@ class _CartItemWidgetState extends State<CartItemWidget> {
       ),
     );
   }
-}
-
-class CartViewModel {
-  Map<int, int> selectedItems = {};
 }

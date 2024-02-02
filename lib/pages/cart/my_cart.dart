@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:merchendise_galaxy/pages/cart/bottom_text.dart';
 import 'package:merchendise_galaxy/pages/cart/cart_items.dart';
+import 'package:merchendise_galaxy/pages/cart/cart_view.dart';
 import 'package:merchendise_galaxy/re_useable/appbar.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
 import 'package:merchendise_galaxy/res/components/dummy_products.dart';
@@ -20,12 +22,17 @@ class _CartViewState extends State<CartView> {
     return Scaffold(
       backgroundColor: AppColor.backGroundColor,
       appBar: AppBar(
-        backgroundColor: AppColor.backGroundColor,
-        elevation: 0,
-        toolbarHeight: 90,
-        automaticallyImplyLeading: false,
-        title: const AppBarWidget(title: 'Cart'),
-        iconTheme: IconThemeData(color: AppColor.buttonColor),
+        backgroundColor: Colors.blue,
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(LineAwesomeIcons.angle_left)),
+        title: Padding(
+          padding: const EdgeInsets.only(left: 70),
+          child: Text(
+            'Cart',
+            style: TextStyle(fontSize: 28, color: Colors.black),
+          ),
+        ),
       ),
       body: Column(
         children: [
