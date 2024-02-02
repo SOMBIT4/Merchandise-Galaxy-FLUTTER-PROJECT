@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/pages/chat/Chat.dart';
 import 'package:merchendise_galaxy/pages/product/bottom_navbar.dart';
-import 'package:merchendise_galaxy/pages/product/my_cart.dart';
+import 'package:merchendise_galaxy/pages/cart/my_cart.dart';
 import 'package:merchendise_galaxy/pages/product/product_details.dart';
 import 'package:merchendise_galaxy/pages/profile/profile.dart';
 import 'package:merchendise_galaxy/re_useable/showProduct.dart';
@@ -20,7 +20,7 @@ class _HomePageState extends State<ProductPage> {
   void _navigateToMyCart() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => MyCart()),
+      MaterialPageRoute(builder: (context) => CartView()),
     );
   }
 

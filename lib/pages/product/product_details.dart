@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/pages/product/product_model.dart';
-import 'package:merchendise_galaxy/pages/product/utils.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
 
 class ProductDetails extends StatefulWidget {
