@@ -70,4 +70,6 @@ class DummyProductList {
       price: '200',
     ),
   ];
+
+  static List<ProductModel> cartList = <ProductModel>[];
 }

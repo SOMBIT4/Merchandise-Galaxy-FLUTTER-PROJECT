@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/buttons/my_small_button.dart';
+import 'package:merchendise_galaxy/pages/cart/utils.dart';
+import 'package:merchendise_galaxy/pages/product/product_model.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
 
 class ProductListTile extends StatelessWidget {
   const ProductListTile({
     super.key,
-    required this.image,
-    required this.productName,
-    required this.price,
+    required this.productModel,
     required this.onTap,
   });
 
-  final String productName;
-  final String image;
-  final String price;
+  final ProductModel productModel;
   final VoidCallback onTap;
 
   @override
@@ -35,7 +33,7 @@ class ProductListTile extends StatelessWidget {
               child: AspectRatio(
                 aspectRatio: 2 / 1.75,
                 child: Image.asset(
-                  image,
+                  productModel.productImage,
                   fit: BoxFit.fill,
                 ),
               ),
@@ -44,7 +42,7 @@ class ProductListTile extends StatelessWidget {
               height: 8,
             ),
             Text(
-              productName,
+              productModel.productName,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
@@ -74,7 +72,7 @@ class ProductListTile extends StatelessWidget {
                   width: 2,
                 ),
                 Text(
-                  '\$$price',
+                  '\$${productModel.price}',
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                         fontWeight: FontWeight.w500,
                       ),
@@ -89,14 +87,20 @@ class ProductListTile extends StatelessWidget {
               children: [
                 MyButton(
                     onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'Product added',
-                          ),
-                          backgroundColor: Colors.purple,
-                        ),
-                      );
+                      var isAdded = Utils.addToCart(productModel);
+                      if (isAdded) {
+                        Utils.toastMessage();
+                      } else {
+                        Utils.toastMessage(message: 'Cant add to Cart');
+                      }
+                      // ScaffoldMessenger.of(context).showSnackBar(
+                      //   SnackBar(
+                      //     content: Text(
+                      //       'Product added',
+                      //     ),
+                      //     backgroundColor: Colors.purple,
+                      //   ),
+                      // );
                     },
                     child: Text(
                       "Add To Cart",

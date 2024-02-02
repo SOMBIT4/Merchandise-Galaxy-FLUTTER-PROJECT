@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:merchendise_galaxy/pages/cart/utils.dart';
 import 'package:merchendise_galaxy/pages/product/product_model.dart';
-import 'package:merchendise_galaxy/pages/product/utils.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -144,12 +144,12 @@ class _ProductDetailState extends State<ProductDetails> {
             alignment: Alignment.bottomRight,
             child: InkWell(
               onTap: () {
-                // var isAdded = Utils.addToCart(widget.productModel);
-                // if (isAdded) {
-                //   Utils.toastMessage();
-                // } else {
-                //   Utils.toastMessage(message: 'Cant add to Cart');
-                // }
+                var isAdded = Utils.addToCart(widget.productModel);
+                if (isAdded) {
+                  Utils.toastMessage();
+                } else {
+                  Utils.toastMessage(message: 'Cant add to Cart');
+                }
               },
               child: Container(
                 height: 65,
