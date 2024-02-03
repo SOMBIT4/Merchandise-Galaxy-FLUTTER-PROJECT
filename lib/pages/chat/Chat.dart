@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
     await _firestore
         .collection('users')
-        .where("Email", isEqualTo: _search.text)
+        .where("Name", isEqualTo: _search.text)
         .get()
         .then((value) {
       if (value.docs.isNotEmpty) {

@@ -68,7 +68,7 @@ class ChatRoom extends StatelessWidget {
             ),
           ],
         ),
-        ////Text(userMap['Name']), //StreamBuilder<DocumentSnapshot>(
+        //Text(userMap['Name']), //StreamBuilder<DocumentSnapshot>(
         //   stream: _firestore
         //       .collection("users")
         //       .doc(userMap[FirebaseAuth.instance.currentUser?.uid])
@@ -118,12 +118,13 @@ class ChatRoom extends StatelessWidget {
                   .collection('chatroom')
                   .doc(chatroomId)
                   .collection('chats')
-                  .orderBy("time", descending: false)
+                  .orderBy("time", descending: true)
                   .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
+                    reverse: true,
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       Map<String, dynamic> map = snapshot.data!.docs[index]

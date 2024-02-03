@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,14 @@ class _AddItemState extends State<AddItem> {
   }
 
   uploadItem() async {
+    //show loading circle
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
     if (selectedImage != null &&
         namecontroller.text != "" &&
         pricecontroller.text != "" &&
@@ -40,7 +49,7 @@ class _AddItemState extends State<AddItem> {
       String addId = randomAlphaNumeric(10);
 
       Reference firebaseStorageRef =
-          FirebaseStorage.instance.ref().child("blogImages").child(addId);
+          FirebaseStorage.instance.ref().child("itemImages").child(addId);
       final UploadTask task = firebaseStorageRef.putFile(selectedImage!);
 
       var downloadUrl = await (await task).ref.getDownloadURL();
@@ -52,6 +61,7 @@ class _AddItemState extends State<AddItem> {
         "Detail": detailcontroller.text
       };
       await addItemData(addItem, value!).then((value) {
+        Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: Colors.orangeAccent,

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -32,6 +33,15 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
 
   Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
     final file = await ImagePicker().pickImage(source: ImageSource.gallery);
+    //show loading circle
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
     if (file != null) {
       File imageFile = File(file.path);
     }
@@ -56,7 +66,7 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
       setState(() {
         _profileImageUrl = imageUrl;
       });
-
+      Navigator.pop(context);
       print("url is ---------------------------------------");
       print(imageUrl);
     } catch (e) {
@@ -147,8 +157,12 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
                                   width: 120,
                                   height: 120,
                                   child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(100),
-                                      child: Image.network(_profileImageUrl!)),
+                                    borderRadius: BorderRadius.circular(100),
+                                    child: Image.network(
+                                      _profileImageUrl!,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 )
                               : SizedBox(
                                   width: 120,
