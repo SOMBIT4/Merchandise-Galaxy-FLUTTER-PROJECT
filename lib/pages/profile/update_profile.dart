@@ -91,6 +91,11 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
           content: Text('User profile deleted successfully!'),
         ),
       );
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        await user.delete();
+      }
       users.doc(_user.uid).delete();
     } catch (e) {
       print('Error deleting user profile: $e');
@@ -224,24 +229,44 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
                                       // -- IMAGE with ICON
                                       Stack(
                                         children: [
-                                          data['ProfileImage'] != null
-                                              ? Stack(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 120,
-                                                      height: 120,
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(100),
-                                                        child: Image.network(
-                                                          "${data['ProfileImage']}",
-                                                          fit: BoxFit.cover,
+                                          _profileImageUrl == null
+                                              ? data['ProfileImage'] == null
+                                                  ? Stack(
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 120,
+                                                          height: 120,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        100),
+                                                            child: Image.asset(
+                                                                AppAssets
+                                                                    .profileImg),
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )
+                                                      ],
+                                                    )
+                                                  : Stack(
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 120,
+                                                          height: 120,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        100),
+                                                            child:
+                                                                Image.network(
+                                                              "${data['ProfileImage']}",
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )
                                               : Stack(
                                                   children: [
                                                     SizedBox(
@@ -251,9 +276,10 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(100),
-                                                        child: Image.asset(
-                                                            AppAssets
-                                                                .profileImg),
+                                                        child: Image.network(
+                                                          _profileImageUrl!,
+                                                          fit: BoxFit.cover,
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
