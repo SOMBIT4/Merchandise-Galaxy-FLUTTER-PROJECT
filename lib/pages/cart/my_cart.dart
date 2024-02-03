@@ -3,7 +3,6 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:merchendise_galaxy/pages/cart/bottom_text.dart';
 import 'package:merchendise_galaxy/pages/cart/cart_items.dart';
 import 'package:merchendise_galaxy/pages/cart/cart_view.dart';
-import 'package:merchendise_galaxy/re_useable/appbar.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
 import 'package:merchendise_galaxy/res/components/dummy_products.dart';
 

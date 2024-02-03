@@ -146,9 +146,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(color: Colors.black)),
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
               const Divider(),
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
 
               /// -- MENU
 
@@ -164,9 +164,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(color: Colors.black)),
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
               const Divider(),
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
+
+              SizedBox(
+                width: 200,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pushNamed(context, '/addItem'),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColor.whiteColor,
+                      side: BorderSide.none,
+                      shape: const StadiumBorder()),
+                  child: const Text('Add Items',
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 55, 142, 241))),
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Divider(),
+              const SizedBox(height: 10),
 
               SizedBox(
                 width: 200,
