@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,6 +20,10 @@ class _AddItemState extends State<AddItem> {
   TextEditingController detailcontroller = new TextEditingController();
   final ImagePicker _picker = ImagePicker();
   File? selectedImage;
+
+  Future addItemData(Map<String, dynamic> userInfoMap, String name) async {
+    return await FirebaseFirestore.instance.collection(name).add(userInfoMap);
+  }
 
   Future getImage() async {
     var image = await _picker.pickImage(source: ImageSource.gallery);
@@ -46,15 +51,17 @@ class _AddItemState extends State<AddItem> {
         "Price": pricecontroller.text,
         "Detail": detailcontroller.text
       };
-      // await DatabaseMethods().addFoodItem(addItem, value!).then((value) {
-      //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //       backgroundColor: Colors.orangeAccent,
-      //       content: Text(
-      //         "Food Item has been added Successfully",
-      //         style: TextStyle(fontSize: 18.0),
-      //       ),),);
-      // }
-      // );
+      await addItemData(addItem, value!).then((value) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.orangeAccent,
+            content: Text(
+              "Item has been added Successfully",
+              style: TextStyle(fontSize: 18.0),
+            ),
+          ),
+        );
+      });
     }
   }
 
