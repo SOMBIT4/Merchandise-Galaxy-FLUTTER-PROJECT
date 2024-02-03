@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:merchendise_galaxy/components/messaging.dart';
 import 'package:merchendise_galaxy/pages/chat/Chat.dart';
 import 'package:merchendise_galaxy/pages/product/bottom_navbar.dart';
 import 'package:merchendise_galaxy/pages/cart/my_cart.dart';
@@ -10,6 +11,7 @@ import 'package:merchendise_galaxy/res/colors/app_color.dart';
 import 'package:merchendise_galaxy/res/components/dummy_products.dart';
 
 class ProductPage extends StatefulWidget {
+
   const ProductPage({super.key});
 
   @override
@@ -41,6 +43,7 @@ class _HomePageState extends State<ProductPage> {
               HomeScreen()), // Replace BlankPage with the actual blank page you want to navigate to
     );
   }
+  final _messagingService = MessagingService();
 
   @override
   Widget build(BuildContext context) {
@@ -300,5 +303,12 @@ class _HomePageState extends State<ProductPage> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _messagingService
+        .init(context); // Initialize MessagingService to handle notifications
   }
 }
