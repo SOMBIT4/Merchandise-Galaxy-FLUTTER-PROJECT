@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';
@@ -53,14 +52,14 @@ class _ProfileInfoState extends State<ProfileInfo> {
               //mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // -- IMAGE with ICON
-                SizedBox(
-                  width: 150,
-                  height: 150,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.asset(AppAssets.profileImg),
-                  ),
-                ),
+                // SizedBox(
+                //   width: 150,
+                //   height: 150,
+                //   child: ClipRRect(
+                //     borderRadius: BorderRadius.circular(100),
+                //     child: Image.asset(AppAssets.profileImg),
+                //   ),
+                // ),
                 FutureBuilder<DocumentSnapshot>(
                   future: FirebaseFirestore.instance
                       .collection('users')
@@ -84,127 +83,166 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           snapshot.data!.data() as Map<String, dynamic>;
                       //return Text("Full Name: ${data['name']}");
                       return Container(
-                        width: 300,
+                        width: 700,
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            Container(
-                              height: 100,
-                              width: 300,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: [
-                                  BoxShadow(
-                                      offset: Offset(0, 5),
-                                      color: Color.fromARGB(255, 82, 85, 83)
-                                          .withOpacity(.2),
-                                      spreadRadius: 2,
-                                      blurRadius: 10)
-                                ],
-                              ),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 70,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.person,
-                                          size: 36,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 200,
-                                    padding: EdgeInsets.only(left: 20, top: 17),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "User_Name ",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 14),
+                            data['ProfileImage'] != null
+                                ? Stack(
+                                    children: [
+                                      SizedBox(
+                                        width: 120,
+                                        height: 120,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          child: Image.network(
+                                            "${data['ProfileImage']}",
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text(
-                                          "${data['Name']}",
-                                          style: TextStyle(fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   )
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 25,
-                            ),
-                            Container(
-                              height: 100,
-                              width: 300,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: [
-                                  BoxShadow(
-                                      offset: Offset(0, 5),
-                                      color: Color.fromARGB(255, 82, 85, 83)
-                                          .withOpacity(.2),
-                                      spreadRadius: 2,
-                                      blurRadius: 10)
-                                ],
-                              ),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 70,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.mail,
-                                          size: 36,
-                                        )
-                                      ],
-                                    ),
+                                : Stack(
+                                    children: [
+                                      SizedBox(
+                                        width: 120,
+                                        height: 120,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          child:
+                                              Image.asset(AppAssets.profileImg),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Container(
-                                    height: 100,
-                                    width: 220,
-                                    padding: EdgeInsets.only(left: 20, top: 17),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "User_E-mail ",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 14),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                Container(
+                                  height: 100,
+                                  width: 300,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          offset: Offset(0, 5),
+                                          color: Color.fromARGB(255, 82, 85, 83)
+                                              .withOpacity(.2),
+                                          spreadRadius: 2,
+                                          blurRadius: 10)
+                                    ],
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 70,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.person,
+                                              size: 36,
+                                            )
+                                          ],
                                         ),
-                                        SizedBox(
-                                          height: 5,
+                                      ),
+                                      Container(
+                                        width: 200,
+                                        padding:
+                                            EdgeInsets.only(left: 20, top: 17),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "User_Name ",
+                                              style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 14),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              "${data['Name']}",
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          "${data['Email']}",
-                                          style: TextStyle(fontSize: 16),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 25,
+                                ),
+                                Container(
+                                  height: 100,
+                                  width: 300,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          offset: Offset(0, 5),
+                                          color: Color.fromARGB(255, 82, 85, 83)
+                                              .withOpacity(.2),
+                                          spreadRadius: 2,
+                                          blurRadius: 10)
+                                    ],
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 70,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.mail,
+                                              size: 36,
+                                            )
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
+                                      ),
+                                      Container(
+                                        height: 100,
+                                        width: 220,
+                                        padding:
+                                            EdgeInsets.only(left: 20, top: 17),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "User_E-mail ",
+                                              style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 14),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              "${data['Email']}",
+                                              style: TextStyle(fontSize: 16),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ],
                         ),
                       );

@@ -35,7 +35,7 @@ class Mytextfield3 extends StatelessWidget {
           ),
           fillColor: Colors.grey.shade300,
           filled: true,
-          hintText: hintText,
+          //   hintText: hintText,
         ),
       ),
     );

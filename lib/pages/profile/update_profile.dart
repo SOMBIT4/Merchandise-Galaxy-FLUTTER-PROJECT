@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:merchendise_galaxy/components/new_name_txt.dart';
 import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
 
@@ -19,6 +18,7 @@ class UpdateProfileScreen extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<UpdateProfileScreen> {
+  final newusername = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final CollectionReference users =
       FirebaseFirestore.instance.collection('users');
@@ -29,7 +29,6 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
 
   String? _profileImageUrl;
   String imageUrl = '';
-  Uint8List? _image_path;
 
   Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
     final file = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -41,10 +40,6 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
             child: CircularProgressIndicator(),
           );
         });
-
-    if (file != null) {
-      File imageFile = File(file.path);
-    }
 
     if (file == null) return;
 
@@ -67,6 +62,7 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
         _profileImageUrl = imageUrl;
       });
       Navigator.pop(context);
+
       print("url is ---------------------------------------");
       print(imageUrl);
     } catch (e) {
@@ -74,23 +70,67 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
     }
   }
 
-  Future<void> _updateUserProfile() async {
+  Future<void> deleteProfile() async {
     try {
-      users.doc(_user.uid).update(
-        {
-          'Name': _usernameController.text,
-          'Email': _emailController.text,
-          'ProfileImage': imageUrl,
-        },
-      );
+      logout() async {
+        try {
+          await GoogleSignIn().signOut();
+          await FirebaseAuth.instance.signOut();
+
+          //  await FirebaseAuth.instance.delete();
+        } catch (e) {
+          print(e);
+        }
+      }
+
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/login_page', (route) => false);
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('User profile updated successfully!'),
+          content: Text('User profile deleted successfully!'),
         ),
       );
+      users.doc(_user.uid).delete();
     } catch (e) {
-      print('Error updating user profile: $e');
+      print('Error deleting user profile: $e');
+    }
+  }
+
+  Future<void> _updateUserProfile() async {
+    if (newusername.text.isEmpty || imageUrl.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            backgroundColor: Colors.deepPurple,
+            title: Text(
+              'Please select an image and a new name',
+              style: TextStyle(color: Colors.white),
+            ),
+          );
+        },
+      );
+    } else {
+      try {
+        users.doc(_user.uid).update(
+          {
+            'Name': newusername.text,
+            'Email': _emailController.text,
+            'ProfileImage': imageUrl,
+          },
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('User profile updated successfully!'),
+          ),
+        );
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/profileScreen', (route) => false);
+      } catch (e) {
+        print('Error updating user profile: $e');
+      }
     }
   }
 
@@ -140,54 +180,17 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
               // QuerySnapshot querySnapshot = snapshot.data;
               // List<QueryDocumentSnapshot> document = querySnapshot.docs;
 
-              // We need to Convert your documnets to Maps to display
+              // // We need to Convert your documnets to Maps to display
               // List<Map> items = document.map((e) => e.data() as Map).toList();
-              //Map thisItems = items[index];
+
+              // Map thisItems = items[index];
 
               return SingleChildScrollView(
                 child: Container(
                   padding: const EdgeInsets.all(30),
                   child: Column(
                     children: [
-                      // -- IMAGE with ICON
-                      Stack(
-                        children: [
-                          _profileImageUrl != null
-                              ? SizedBox(
-                                  width: 120,
-                                  height: 120,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: Image.network(
-                                      _profileImageUrl!,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                )
-                              : SizedBox(
-                                  width: 120,
-                                  height: 120,
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(100),
-                                      child: Image.asset(AppAssets.profileImg)),
-                                ),
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Container(
-                              width: 35,
-                              height: 35,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: AppColor.whiteColor),
-                              child: IconButton(
-                                  onPressed: _create,
-                                  icon: Icon(Icons.camera_alt)),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 0),
                       FutureBuilder<DocumentSnapshot>(
                         future: FirebaseFirestore.instance
                             .collection('users')
@@ -213,230 +216,209 @@ class _MyWidgetState extends State<UpdateProfileScreen> {
                                 snapshot.data!.data() as Map<String, dynamic>;
 
                             return Container(
-                              width: 300,
+                              width: 700,
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const SizedBox(
-                                    height: 30,
-                                  ),
-                                  Stack(
+                                  Column(
                                     children: [
-                                      Container(
-                                        height: 100,
-                                        width: 300,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                offset: Offset(0, 5),
-                                                color: Color.fromARGB(
-                                                        255, 82, 85, 83)
-                                                    .withOpacity(.2),
-                                                spreadRadius: 2,
-                                                blurRadius: 10)
-                                          ],
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              width: 70,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(
-                                                    Icons.person,
-                                                    size: 36,
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 200,
-                                              padding: EdgeInsets.only(
-                                                  left: 20, top: 17),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "User_Name ",
-                                                    style: TextStyle(
-                                                        color: Colors.grey,
-                                                        fontSize: 14),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Text(
-                                                    "${data['Name']}",
-                                                    style:
-                                                        TextStyle(fontSize: 18),
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 0,
-                                        right: 0,
-                                        child: Container(
-                                          width: 35,
-                                          height: 35,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              color: AppColor.whiteColor),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              LineAwesomeIcons.alternate_pencil,
-                                              color: Colors.black,
-                                              size: 28,
+                                      // -- IMAGE with ICON
+                                      Stack(
+                                        children: [
+                                          data['ProfileImage'] != null
+                                              ? Stack(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 120,
+                                                      height: 120,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(100),
+                                                        child: Image.network(
+                                                          "${data['ProfileImage']}",
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : Stack(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 120,
+                                                      height: 120,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(100),
+                                                        child: Image.asset(
+                                                            AppAssets
+                                                                .profileImg),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                          Positioned(
+                                            bottom: 0,
+                                            right: 0,
+                                            child: Container(
+                                              width: 35,
+                                              height: 35,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100),
+                                                  color: AppColor.whiteColor),
+                                              child: IconButton(
+                                                  onPressed: _create,
+                                                  icon: Icon(Icons.camera_alt)),
                                             ),
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 25,
-                                  ),
-                                  Stack(
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Container(
-                                        height: 100,
-                                        width: 300,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                offset: Offset(0, 5),
-                                                color: Color.fromARGB(
-                                                        255, 82, 85, 83)
-                                                    .withOpacity(.2),
-                                                spreadRadius: 2,
-                                                blurRadius: 10)
-                                          ],
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              width: 70,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(
-                                                    Icons.mail,
-                                                    size: 36,
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 220,
-                                              padding: EdgeInsets.only(
-                                                  left: 20, top: 17),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "User_E-mail ",
-                                                    style: TextStyle(
-                                                        color: Colors.grey,
-                                                        fontSize: 14),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Text(
-                                                    "${data['Email']}",
-                                                    style:
-                                                        TextStyle(fontSize: 16),
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                                      const SizedBox(
+                                        height: 30,
                                       ),
-                                      Positioned(
-                                        top: 0,
-                                        right: 0,
-                                        child: Container(
-                                          width: 35,
-                                          height: 35,
-                                          decoration: BoxDecoration(
+                                      Stack(
+                                        children: [
+                                          Container(
+                                            height: 80,
+                                            width: 300,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
                                               borderRadius:
-                                                  BorderRadius.circular(100),
-                                              color: AppColor.whiteColor),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              LineAwesomeIcons.alternate_pencil,
-                                              color: Colors.black,
-                                              size: 28,
+                                                  BorderRadius.circular(15),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    offset: Offset(0, 5),
+                                                    color: Color.fromARGB(
+                                                            255, 82, 85, 83)
+                                                        .withOpacity(.2),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 10)
+                                              ],
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  width: 70,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.person,
+                                                        size: 36,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: 200,
+                                                  padding: EdgeInsets.only(
+                                                      left: 20, top: 17),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        "User_Name ",
+                                                        style: TextStyle(
+                                                            color: Colors.grey,
+                                                            fontSize: 14),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        "${data['Name']}",
+                                                        style: TextStyle(
+                                                            fontSize: 18),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 40,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: 150,
-                                        child: ElevatedButton(
-                                          onPressed: _updateUserProfile,
-                                          style: ElevatedButton.styleFrom(
-                                              backgroundColor: Color.fromARGB(
-                                                      255, 35, 255, 46)
-                                                  .withOpacity(0.3),
-                                              elevation: 0,
-                                              foregroundColor: Color.fromARGB(
-                                                  255, 58, 255, 68),
-                                              side: BorderSide.none,
-                                              shape: const StadiumBorder()),
-                                          child: Text('Done',
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 0, 0, 0))),
-                                        ),
+                                      const SizedBox(height: 25),
+                                      //username field
+                                      NewName(
+                                        controller: newusername,
+                                        //hintText: 'Enter new name ',
+                                        obscureText: false,
                                       ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 30),
 
-                                  // -- Created Date and Delete Button
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () {},
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.redAccent
-                                                .withOpacity(0.1),
-                                            elevation: 0,
-                                            foregroundColor: Colors.red,
-                                            shape: const StadiumBorder(),
-                                            side: BorderSide.none),
-                                        child: const Text('Delete Account'),
+                                      const SizedBox(height: 20),
+                                      SizedBox(
+                                        height: 25,
                                       ),
+
+                                      SizedBox(
+                                        height: 40,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SizedBox(
+                                            width: 150,
+                                            child: ElevatedButton(
+                                              onPressed: _updateUserProfile,
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      Color.fromARGB(
+                                                              255, 35, 255, 46)
+                                                          .withOpacity(0.3),
+                                                  elevation: 0,
+                                                  foregroundColor:
+                                                      Color.fromARGB(
+                                                          255, 58, 255, 68),
+                                                  side: BorderSide.none,
+                                                  shape: const StadiumBorder()),
+                                              child: Text('Done',
+                                                  style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 0, 0, 0))),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 30),
+
+                                      // -- Created Date and Delete Button
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              deleteProfile();
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors
+                                                    .redAccent
+                                                    .withOpacity(0.1),
+                                                elevation: 0,
+                                                foregroundColor: Colors.red,
+                                                shape: const StadiumBorder(),
+                                                side: BorderSide.none),
+                                            child: const Text('Delete Account'),
+                                          ),
+                                        ],
+                                      )
                                     ],
-                                  )
+                                  ),
                                 ],
                               ),
                             );

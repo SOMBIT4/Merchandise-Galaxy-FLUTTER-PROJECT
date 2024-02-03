@@ -48,7 +48,7 @@ class _Mytextfield1State extends State<Mytextfield4> {
               )),
           fillColor: Colors.grey.shade300,
           filled: true,
-          hintText: widget.hintText,
+          //hintText: widget.hintText,
         ),
       ),
     );

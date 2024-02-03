@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/pages/add_items.dart/add_item.dart';
 import 'package:merchendise_galaxy/pages/product/bottom_navbar.dart';
 import 'package:merchendise_galaxy/pages/product/product_page.dart';
+import 'package:merchendise_galaxy/pages/profile/profile.dart';
 import 'package:merchendise_galaxy/pages/profile/profile_info.dart';
 //import 'package:merchendise_galaxy/pages/profile/profile_update.dart';
 import 'package:merchendise_galaxy/pages/login_reg/register_page.dart';
@@ -36,6 +37,7 @@ void main() async {
         '/updateProfile': (context) => const UpdateProfileScreen(),
         '/profileInfo': (context) => const ProfileInfo(),
         '/addItem': (context) => const AddItem(),
+        '/profileScreen': (context) => const ProfileScreen(),
       },
     ),
   );

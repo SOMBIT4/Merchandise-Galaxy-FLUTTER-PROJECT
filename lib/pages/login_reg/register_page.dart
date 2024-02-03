@@ -75,7 +75,7 @@ class _registerPageState extends State<registerPage> {
                 //username field
                 Mytextfield(
                   controller: usernamecontroller,
-                  hintText: 'Gmail address',
+                  // hintText: 'Gmail address',
                   obscureText: false,
                 ),
 
