@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:merchendise_galaxy/pages/login_reg/login_pages.dart';
-import 'package:merchendise_galaxy/pages/product/product_page.dart';
+import 'package:merchendise_galaxy/pages/product/bottom_navbar.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
 
 class splashscreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _splashscreenState extends State<splashscreen>
       final user = FirebaseAuth.instance.currentUser;
       if (user != null) isLoggedIn = true;
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (_) => isLoggedIn ? const ProductPage() : LoginPage()));
+          builder: (_) => isLoggedIn ? const BottomNavigation() : LoginPage()));
     });
   }
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:merchendise_galaxy/components/messaging.dart';
 import 'package:merchendise_galaxy/pages/chat/Chat.dart';
-import 'package:merchendise_galaxy/pages/product/bottom_navbar.dart';
 import 'package:merchendise_galaxy/pages/cart/my_cart.dart';
 import 'package:merchendise_galaxy/pages/product/product_details.dart';
 import 'package:merchendise_galaxy/pages/profile/profile.dart';
@@ -11,7 +10,6 @@ import 'package:merchendise_galaxy/res/colors/app_color.dart';
 import 'package:merchendise_galaxy/res/components/dummy_products.dart';
 
 class ProductPage extends StatefulWidget {
-
   const ProductPage({super.key});
 
   @override
@@ -43,13 +41,14 @@ class _HomePageState extends State<ProductPage> {
               HomeScreen()), // Replace BlankPage with the actual blank page you want to navigate to
     );
   }
+
   final _messagingService = MessagingService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.backGroundColor,
-      bottomNavigationBar: const BottomNavigation(),
+      // bottomNavigationBar: const BottomNavigation(),
       body: ListView(
         children: [
           SafeArea(
@@ -59,7 +58,7 @@ class _HomePageState extends State<ProductPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 5,
+                  height: 20,
                 ),
                 Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,34 +84,50 @@ class _HomePageState extends State<ProductPage> {
                       ],
                     ),
                     SizedBox(
-                      width: 55,
+                      width: 95,
                     ),
                     GestureDetector(
-                      onTap: _navigateToMyCart,
-                      child: const Icon(
-                        Icons.shopping_cart_outlined,
-                        size: 42,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    GestureDetector(
-                      onTap: _navigateToProfile,
+                      onTap: _navigateToHomeScreen,
                       child: Container(
-                        height: 40,
-                        width: 44,
-                        padding: const EdgeInsets.all(8),
+                        height: 50,
+                        width: 50,
+                        padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
                           color: AppColor.buttonColor,
-                          borderRadius: BorderRadius.circular(15.0),
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: const Icon(
-                          Icons.person_2,
+                          Icons.chat,
                           color: Colors.white,
                         ),
                       ),
                     ),
+                    // GestureDetector(
+                    //   onTap: _navigateToMyCart,
+                    //   child: const Icon(
+                    //     Icons.shopping_cart_outlined,
+                    //     size: 42,
+                    //   ),
+                    // ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    // GestureDetector(
+                    //   onTap: _navigateToProfile,
+                    //   child: Container(
+                    //     height: 40,
+                    //     width: 44,
+                    //     padding: const EdgeInsets.all(8),
+                    //     decoration: BoxDecoration(
+                    //       color: AppColor.buttonColor,
+                    //       borderRadius: BorderRadius.circular(15.0),
+                    //     ),
+                    //     child: const Icon(
+                    //       Icons.person_2,
+                    //       color: Colors.white,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 const SizedBox(
@@ -124,56 +139,39 @@ class _HomePageState extends State<ProductPage> {
                       width: 20,
                     ),
                     // Expanded(child: ),
-                    Expanded(
-                      child: Container(
-                        height: 34,
-                        //width: 50,
-                        decoration: BoxDecoration(
-                          color: AppColor.whiteColor,
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColor.shadowColor,
-                              spreadRadius: 2.2,
-                              blurRadius: 5,
-                              offset: Offset(-3, 1),
-                            ),
-                          ],
-                        ),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: "Search",
-                            border: InputBorder.none,
-                            prefixIcon: Image.asset(
-                              AppAssets.searchIcon,
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 10,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: Container(
+                    //     height: 34,
+                    //     //width: 50,
+                    //     decoration: BoxDecoration(
+                    //       color: AppColor.whiteColor,
+                    //       borderRadius: BorderRadius.circular(12),
+                    //       boxShadow: [
+                    //         BoxShadow(
+                    //           color: AppColor.shadowColor,
+                    //           spreadRadius: 2.2,
+                    //           blurRadius: 5,
+                    //           offset: Offset(-3, 1),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //     child: TextField(
+                    //       decoration: InputDecoration(
+                    //         hintText: "Search",
+                    //         border: InputBorder.none,
+                    //         prefixIcon: Image.asset(
+                    //           AppAssets.searchIcon,
+                    //         ),
+                    //         contentPadding: const EdgeInsets.symmetric(
+                    //           horizontal: 20,
+                    //           vertical: 10,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     const SizedBox(
                       width: 15,
-                    ),
-
-                    GestureDetector(
-                      onTap: _navigateToHomeScreen,
-                      child: Container(
-                        height: 60,
-                        width: 60,
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: AppColor.buttonColor,
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: const Icon(
-                          Icons.chat,
-                          color: Colors.white,
-                        ),
-                      ),
                     ),
                   ],
                 ),
@@ -181,7 +179,7 @@ class _HomePageState extends State<ProductPage> {
                   height: 20,
                 ),
                 Text(
-                  'Product',
+                  'Food',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
@@ -220,7 +218,7 @@ class _HomePageState extends State<ProductPage> {
                   height: 20,
                 ),
                 Text(
-                  'Product',
+                  'Polo-T-shirt',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
@@ -259,7 +257,7 @@ class _HomePageState extends State<ProductPage> {
                   height: 20,
                 ),
                 Text(
-                  'Product',
+                  'T-shirt',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,

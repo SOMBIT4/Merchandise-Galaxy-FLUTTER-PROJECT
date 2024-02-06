@@ -65,7 +65,10 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('\$${widget.productModel.price}',
+                    Text(
+                        cartVM.selectedItems[widget.index] != null
+                            ? '\$${200 * cartVM.selectedItems[widget.index]!}'
+                            : "\$200",
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium!

@@ -6,7 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:merchendise_galaxy/res/app_assets/app_assets.dart';
 //import 'package:merchendise_galaxy/pages/login_pages.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
@@ -40,14 +39,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(LineAwesomeIcons.angle_left)),
+        backgroundColor: const Color.fromARGB(255, 162, 213, 255),
         title: Padding(
           padding: const EdgeInsets.only(left: 70),
           child: Text(
-            'Profile',
+            '        Profile',
             style: TextStyle(fontSize: 28, color: Colors.black),
           ),
         ),

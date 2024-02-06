@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:merchendise_galaxy/pages/cart/bottom_text.dart';
+import 'package:merchendise_galaxy/buttons/my_button.dart';
 import 'package:merchendise_galaxy/pages/cart/cart_items.dart';
 import 'package:merchendise_galaxy/pages/cart/cart_view.dart';
+import 'package:merchendise_galaxy/pages/product/payment_page.dart';
 import 'package:merchendise_galaxy/res/colors/app_color.dart';
 import 'package:merchendise_galaxy/res/components/dummy_products.dart';
 
@@ -21,23 +21,20 @@ class _CartViewState extends State<CartView> {
     return Scaffold(
       backgroundColor: AppColor.backGroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(LineAwesomeIcons.angle_left)),
+        backgroundColor: const Color.fromARGB(255, 162, 213, 255),
         title: Padding(
           padding: const EdgeInsets.only(left: 70),
           child: Text(
-            'Cart',
+            '        Cart',
             style: TextStyle(fontSize: 28, color: Colors.black),
           ),
         ),
       ),
       body: Column(
         children: [
-          const SizedBox(height: 30),
+          const SizedBox(height: 25),
           SizedBox(
-            height: size.height * 0.43,
+            height: size.height * 0.58,
             child: ListView.separated(
               itemCount: DummyProductList.cartList.length,
               shrinkWrap: true,
@@ -51,11 +48,11 @@ class _CartViewState extends State<CartView> {
               },
             ),
           ),
-          const SizedBox(height: 25),
+          const SizedBox(height: 35),
           Expanded(
             child: Container(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 24).copyWith(top: 50),
+                  const EdgeInsets.symmetric(horizontal: 60).copyWith(top: 30),
               decoration: BoxDecoration(
                 color: AppColor.whiteColor,
                 borderRadius: const BorderRadius.only(
@@ -72,27 +69,21 @@ class _CartViewState extends State<CartView> {
               ),
               child: Column(
                 children: [
-                  const BottomTextWidget(
-                    price: '200.0',
-                    leadingText: 'Selected Items',
-                    isSubT: false,
-                  ),
-                  const SizedBox(height: 15),
-                  const BottomTextWidget(
-                      price: '30.0',
-                      leadingText: 'Shipping Fee',
-                      isSubT: false),
-                  const SizedBox(height: 15),
-                  Divider(
-                    color: AppColor.grayColor,
-                  ),
-                  const SizedBox(height: 25),
-                  const BottomTextWidget(
-                      price: '230.0', leadingText: 'Subtotal', isSubT: true),
-                  const SizedBox(height: 22),
-                  //check out button
-                  // CustomButton(
-                  //     width: size.width * 0.7, title: 'Checkout', onTap: () {}),
+                  MyButton2(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PaymentPage()));
+                      },
+                      child: Text(
+                        "Pay Now",
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                              color: AppColor.whiteColor,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 22,
+                            ),
+                      )),
                   const SizedBox(height: 14),
                 ],
               ),
