@@ -183,9 +183,11 @@ class ChatRoom extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
         margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: Colors.blue,
-        ),
+            borderRadius: BorderRadius.circular(15),
+            // color: Colors.blue,
+            color: map['sendby'] == _auth.currentUser!.displayName
+                ? Color.fromARGB(255, 3, 70, 187)
+                : Color.fromARGB(255, 18, 23, 26)),
         child: Text(
           map['message'],
           style: TextStyle(
