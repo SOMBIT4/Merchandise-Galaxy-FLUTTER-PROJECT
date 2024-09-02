@@ -6,8 +6,7 @@ https://drive.google.com/file/d/1fUmu1qrLnoxOzBqQD_Izo9cI2Ijdi36g/view?usp=drive
 
 ## Sneak peek:
  1. Flash screen
-![resized_image_1](https://github.com/user-attachments/assets/2580ffac-0352-497c-be26-64ea6cbd0451)
-
+![resized_image_1](https://github.com/user-attachments/assets/bbbc8ffa-2cc6-4ec0-814e-36dfb976022b)
  2. Sign-in page
 ![Screenshot_2024-09-02-18-48-09-002_com example flutter_application_3](https://github.com/user-attachments/assets/f126377b-f0a7-46b7-97a9-dd6b051f488b)
  3. Sign-up page
