@@ -2,17 +2,17 @@
 
 
 ## Sneak peek:
-Flash screen
+ 1. Flash screen
 ![Screenshot_2024-09-02-18-48-01-392_com example flutter_application_3](https://github.com/user-attachments/assets/9b376642-417c-49e0-b152-9d6a7b0cfd2c)
-Sign-in page
+ 2. Sign-in page
 ![Screenshot_2024-09-02-18-48-09-002_com example flutter_application_3](https://github.com/user-attachments/assets/f126377b-f0a7-46b7-97a9-dd6b051f488b)
-Sign-up page
+ 3. Sign-up page
 ![Screenshot_2024-09-02-18-48-16-014_com example flutter_application_3](https://github.com/user-attachments/assets/59d5c92b-17fa-451c-b176-0e88a6a56f8c)
-Forget Password page
+ 4. Forget Password page
 ![Screenshot_2024-09-02-18-48-35-333_com example flutter_application_3](https://github.com/user-attachments/assets/41d2d2e3-8b70-4ae6-b8da-35ac03750e19)
-Product page
+ 5. Product page
 ![Screenshot_2024-09-02-18-49-00-248_com example flutter_application_3](https://github.com/user-attachments/assets/98968e55-ca1b-4ffc-b35b-f2db2b953f2c)
-Add to cart page 
+ 6. Add to cart page 
 ![Screenshot_2024-09-02-18-49-04-548_com example flutter_application_3](https://github.com/user-attachments/assets/d7510de0-2905-416f-a843-ee57cce51f91)
 
 # Description:
