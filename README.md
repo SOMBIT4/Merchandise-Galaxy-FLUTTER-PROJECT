@@ -1,16 +1,15 @@
-# flutter_application_3
+# Merchendise Galaxy
 
-A new Flutter project.
+# Description
+Merchandise-Galaxy is built with Flutter, providing a responsive and cross-platform user interface that ensures a smooth shopping experience. Firebase Core integrates seamlessly, offering reliable backend services like authentication via Firebase Auth and secure data handling with Cloud Firestore. The app also supports Google Sign-In for easy account management, and the Curved Navigation Bar enhances user navigation within the app. Additional features include the use of Line Awesome Icons for a modern look and Fluttertoast for user feedback. With these technologies, Merchandise-Galaxy is both functional and visually appealing, making it a go-to app for online shopping.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Technologies
+flutter
+firebase_core
+firebase_auth
+cloud_firestore
+fluttertoast
+provider
+curved_navigation_bar
+line_awesome_flutter
+google_sign_in
